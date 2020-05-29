@@ -1,5 +1,15 @@
-<app-header></app-header>>
+<app-header></app-header>
 <div class="wrapper">
-    
+    <div class="container">
+        <ul class="row">
+            <a class="fancybox" rel="group" [href]=" url + 'imgs/' + img " *ngFor="let img of appState.portfolioImg">
+                <li class="col-md-4" rel="group" >
+                    <!-- <img [src]=" url+ 'imgs/' + img "> -->
+                    <img [src]=" url+ 'imgs/' + img ">
+
+                </li>
+            </a>
+        </ul>
+    </div>
 </div>
 <app-footer></app-footer>
