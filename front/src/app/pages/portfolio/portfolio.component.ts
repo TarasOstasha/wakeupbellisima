@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import appState from '../../appState';
 
 declare var jQuery: any
+declare var $: any
 
 @Component({
   selector: 'app-portfolio',
@@ -19,33 +20,24 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   async ngOnInit() {
     const fromServer: any = await this.api.getPortfolioImgs();
     this.appState.portfolioImg = fromServer;
-    this.initFancy();
+    //this.initFancy();
+    $(".fancy").fancybox();
     console.log(fromServer);
   }
 
-
-
-  initFancy() {
-    jQuery(document).ready(function () { //Photos Gallery
-      jQuery(".fancybox").fancybox({
-        openEffect: "elastic",
-        closeEffect: "none"
+  // << -- fancybox -- >> \\
+  ngAfterViewInit() {
+    $(document).ready(function () { //Photos Gallery
+      $('[data-fancybox="gallery"]').fancybox({
+        // Options will go here
       });
     });
   }
-  // fancybox
-  ngAfterViewInit() {
-  //   jQuery(document).ready(function () { //Photos Gallery
-  //     jQuery(".fancybox").fancybox({
-  //       openEffect: "elastic",
-  //       closeEffect: "none"
-  //     });
-  //   });
-  }
   ngOnDestroy() {
-   //jQuery(".fancybox").unbind('click.fb');
+    //jQuery(".fancybox").unbind('click.fb');
     // or maybe jQuery(".fancybox").off() to remove all bindings
   }
+  // << -- end fancybox -- >> \\
 
 
 }

@@ -2,11 +2,10 @@
 <div class="wrapper">
     <div class="container">
         <ul class="row">
-            <a class="fancybox" rel="group" [href]=" url + 'imgs/' + img " *ngFor="let img of appState.portfolioImg">
-                <li class="col-md-4" rel="group" >
-                    <!-- <img [src]=" url+ 'imgs/' + img "> -->
+            <a data-fancybox="gallery" rel="group" [href]=" url + 'imgs/' + img " *ngFor="let img of appState.portfolioImg"
+                data-width="800" data-height="600">
+                <li class="col-md-4" rel="group">
                     <img [src]=" url+ 'imgs/' + img ">
-
                 </li>
             </a>
         </ul>
