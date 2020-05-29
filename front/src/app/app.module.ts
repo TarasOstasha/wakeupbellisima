@@ -8,13 +8,23 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './parts/header/header.component';
 import { FooterComponent } from './parts/footer/footer.component';
 import { MainComponent } from './pages/main/main.component';
+import { HomeComponent } from './parts/home/home.component';
+import { ServicesComponent } from './pages/services/services.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    HomeComponent,
+    ServicesComponent,
+    PortfolioComponent,
+    AboutUsComponent,
+    BookAppointmentComponent
   ],
   imports: [
     BrowserModule,
