@@ -19,7 +19,9 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    appState.header.user.userName = this.storage.getItem('user');
+    //appState.header.user.userName = this.storage.getItem('user');
+    appState.header.user = this.storage.getItem('user');
+
   }
 
   toLogin() {

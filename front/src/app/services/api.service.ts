@@ -31,5 +31,9 @@ export class ApiService {
   logOut() {
     return this.http.get( url + 'log-out' ).toPromise();
   }
+
+  upload(obj) {
+    return this.http.post(url + 'upload2', obj, httpOptions).toPromise();
+  }
   
 }

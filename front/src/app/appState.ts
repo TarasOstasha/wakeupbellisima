@@ -1,4 +1,12 @@
-const appState = {
+interface AppState {
+  hostName: any,
+  header: any,
+  portfolioImg: any,
+  state_form: any,
+  error: any,
+  previews: any
+}
+const appState: AppState = {
     hostName: (location.hostname == 'localhost') ? 'http://localhost/' : '/',
     //header
     header: {
@@ -15,7 +23,15 @@ const appState = {
     state_form: 'login',
     error: {
         dublicate_user: false
-    }
+    },
+    //currentNewProductImg: 'assets/img/sws1.png',
+    previews: [
+        {
+          reader: {
+            result: "assets/400x300.png"
+          }
+        }
+      ]
 
 
 }

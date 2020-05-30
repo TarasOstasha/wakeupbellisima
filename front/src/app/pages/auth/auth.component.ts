@@ -88,7 +88,7 @@ export class AuthComponent implements OnInit {
       const fromServer: any = await this.api.login(userData);
       if (fromServer.ok) this.router.navigateByUrl('/redirector');
       this.appState.header.user = fromServer.user;
-      this.storage.setItem('user', this.appState.header.user.userName)
+      this.storage.setItem('user', this.appState.header.user)
     } catch (error) {
       console.log(error)
     }
