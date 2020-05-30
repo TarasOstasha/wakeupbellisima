@@ -5,6 +5,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const mongoose = require('mongoose');
+const Strategy = require('passport-local').Strategy;
+const session = require('express-session');
+const User = require('./models/users');
+//const user = require('./models/user');
+
+// connect to the database
+mongoose.set('useFindAndModify', true);
+mongoose.connect('mongodb+srv://user:1111@cluster0-olmgj.mongodb.net/WakeUpBellisima?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,6 +34,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'downloads')));
 
+require('./config/passport.js'); // connect passport
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

@@ -19,4 +19,17 @@ export class ApiService {
   getPortfolioImgs() {
     return this.http.get( url + 'portfolio-imgs' ).toPromise();
   }
+
+  register(userData) {
+    return this.http.post(url + 'register', userData, httpOptions).toPromise();
+  }
+
+  login(userData) {
+    return this.http.post( url + 'login', userData, httpOptions ).toPromise();
+  }
+
+  logOut() {
+    return this.http.get( url + 'log-out' ).toPromise();
+  }
+  
 }

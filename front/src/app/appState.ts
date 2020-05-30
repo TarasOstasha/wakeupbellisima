@@ -10,7 +10,12 @@ const appState = {
             isLogged: false
         },
     },
-    portfolioImg: []
+    portfolioImg: [],
+    // for auth component
+    state_form: 'login',
+    error: {
+        dublicate_user: false
+    }
 
 
 }

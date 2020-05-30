@@ -14,6 +14,13 @@ import { ServicesComponent } from './pages/services/services.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
+import { AuthComponent } from './pages/auth/auth.component';
+
+// services
+import { ApiService } from './services/api.service';
+import { StorageService } from './services/storage.service';
+import { FormValidatorComponent } from './parts/form-validator/form-validator.component';
+import { RedirectorComponent } from './pages/redirector/redirector.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,10 @@ import { BookAppointmentComponent } from './pages/book-appointment/book-appointm
     ServicesComponent,
     PortfolioComponent,
     AboutUsComponent,
-    BookAppointmentComponent
+    BookAppointmentComponent,
+    AuthComponent,
+    FormValidatorComponent,
+    RedirectorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +44,7 @@ import { BookAppointmentComponent } from './pages/book-appointment/book-appointm
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ApiService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
