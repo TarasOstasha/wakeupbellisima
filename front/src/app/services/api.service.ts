@@ -35,5 +35,22 @@ export class ApiService {
   upload(obj) {
     return this.http.post(url + 'upload2', obj, httpOptions).toPromise();
   }
+
+  deleteFromJson(item) {
+    console.log(item, 'item from api')
+    return this.http.get( url + 'deleteItem', item ).toPromise();
+  }
+
+  slideLeft() {
+    return this.http.get(url + 'left').toPromise();
+  }
+
+  // pickedImg(file) {
+  //   console.log(file, 'file from api')
+  //   return this.http.post( url + 'upload-img', file, {
+  //     reportProgress: true,
+  //     observe: 'events'
+  //   } ).toPromise();
+  //}
   
 }

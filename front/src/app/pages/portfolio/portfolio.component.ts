@@ -1,9 +1,11 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api.service';
 import appState from '../../appState';
 
 declare var jQuery: any
 declare var $: any
+declare var swal: any;
 
 @Component({
   selector: 'app-portfolio',
@@ -15,7 +17,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   appState = appState;
   url = this.appState.hostName;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private http: HttpClient) { }
 
   async ngOnInit() {
     const fromServer: any = await this.api.getPortfolioImgs();
@@ -39,14 +41,53 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   }
   // << -- end fancybox -- >> \\
 
-  moveLeft(index) {
+  async delete(index) {
     const currentImg = this.appState.portfolioImg.splice(index, 1);
-    this.appState.portfolioImg.splice(index-1, 0, currentImg);
+    const fromServer = await this.api.deleteFromJson(currentImg);
+    console.log(fromServer);
   }
+  portfolioImg = []
+  async moveLeft(index) {
+    const currentImg = this.appState.portfolioImg.splice(index, 1);
+    console.log(currentImg, '**currentImg**')
+    this.portfolioImg = this.appState.portfolioImg.splice(index-1, 0, currentImg);
+    console.log(this.portfolioImg,'*portfolioImg*')
+    //const fromServer:any  = await this.api.slideLeft();
+    //this.appState.portfolioImg = fromServer;
+
+  }
+  
 
   moveRight(index) {
 
   }
+
+  selectedFile: File = null;
+
+  onImagePicked(event) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile)
+  }
+
+  filePicker() {
+    //const file = (event.target as HTMLInputElement).files[0];
+    console.log(this.selectedFile.name)
+    const fd = new FormData;
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+    this.http.post('http://localhost/' + 'upload-img', this.selectedFile.name, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe((event) => {
+      if( event.type == HttpEventType.UploadProgress ) {
+        console.log('Upload Progress: ' + Math.round(event.loaded / event.total * 100 ) + '%')
+      }else if( event.type == HttpEventType.Response ) console.log(event)
+      
+    })
+    //const fromServer: any = this.api.pickedImg(fd);
+    //console.log(fromServer);
+  }
+
+  
 
   // upload files
 
@@ -137,15 +178,21 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         console.log('loaded', this.fileCounter);
         // alert('good job');
         if (this.fileQuantity >= this.fileCounter) { this.uploadNextFile(); }
-        alert('success')
-        // swal.fire({
-        //   title: "Good job!",
-        //   text: "File successfully added",
-        //   icon: "success",
-        // })
+        //alert('success')
+        swal.fire({
+          title: "Good job!",
+          text: "File successfully added",
+          icon: "success",
+        })
       }
 
     }
+  }
+
+  sendImg() {
+    const file = this.files[this.fileCounter - 1]; //current upload file
+
+    this.upload(file);
   }
 
   uploadNextFile() {
@@ -167,4 +214,5 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
 
   }
+
 }

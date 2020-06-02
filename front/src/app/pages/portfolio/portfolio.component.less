@@ -9,6 +9,9 @@
     padding-top: 5em;
     //display: grid;
     //grid-template-columns: repeat(4, auto);
+    a {
+        z-index: 1;
+    }
     li {
         list-style: none;
         padding: 30px 0;
@@ -20,13 +23,23 @@
         z-index: 59;
         background: red;
     }
+    button {
+        z-index: 2;
+    }
     .delete {
-        top: 0;
+        top: 30px;
+        left: 0;
     }
     .left {
         left: 0;
+        top: 90px;
     }
     .right {
-        bottom: 0;
+        left: 0;
+        top: 60px;
     }
 }
+
+// input[type="file"] {
+//     visibility: hidden;
+// }
