@@ -36,6 +36,10 @@ export class ApiService {
     return this.http.post(url + 'upload2', obj, httpOptions).toPromise();
   }
 
+  addNewFileToJson(fileName) {
+    return this.http.post(url + 'add-new-file-to-json', {fileName}, httpOptions).toPromise();
+  }
+
   deleteFromJson(item) {
     console.log(item, 'item from api')
     return this.http.get( url + 'deleteItem', item ).toPromise();

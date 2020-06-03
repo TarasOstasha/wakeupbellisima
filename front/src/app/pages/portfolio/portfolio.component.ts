@@ -21,7 +21,10 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
   async ngOnInit() {
     const fromServer: any = await this.api.getPortfolioImgs();
-    this.appState.portfolioImg = fromServer;
+    setTimeout(()=>{
+      this.appState.portfolioImg = fromServer;
+
+    },2000)
     //this.initFancy();
     $(".fancy").fancybox();
     console.log(fromServer);
@@ -179,6 +182,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         // alert('good job');
         if (this.fileQuantity >= this.fileCounter) { this.uploadNextFile(); }
         //alert('success')
+        await this.api.addNewFileToJson(file.name);
         swal.fire({
           title: "Good job!",
           text: "File successfully added",

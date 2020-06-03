@@ -35,8 +35,8 @@
         </div>
         <i (click)='state.previews.splice(i,1)' class="fa fa-window-close close-window" aria-hidden="true"></i> -->
     <div class="row">
-        <div class="col-md-12" *ngFor="let preview of appState.previews; let i = index;">
-            {{ i }}
+        <div class="choose-img col-md-4" *ngFor="let preview of appState.previews; let i = index;">
+            <!-- {{ i }} -->
             <div class="input-pic upload-img">
                 <input id="upload" type="file" (change)="onChange($event)" class="form-control" multiple="multiple">
                 <img [src]="preview.reader.result" alt="Image preview..." class="img-fluid mh-100 mw-100 img">

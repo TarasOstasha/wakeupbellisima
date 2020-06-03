@@ -8,20 +8,49 @@ const User = require('../models/users');
 //let portfolioImgsList;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
 router.get('/portfolio-imgs', async (req, res) => {
   //const portfolioImgsList = await fs.readdir('downloads/imgs');
   //const portfolioImgsList = await fs.readFile('downloads/imgs/imgs.json', 'UTF-8');
-  const portfolioImgsList = await fsFile.readFile('downloads/imgs/imgs.json', 'UTF-8', function(err, data){
-    console.log(data); 
-  });
+  // write end send data to the front end
+  const portfolioImgsList = await fsFile.readFile('downloads/imgs/imgs2.json', 'UTF-8');
   res.status(200).json(JSON.parse(portfolioImgsList));
 })
 
-router.get('/deleteItem', async(req, res) => {
+
+router.post('/add-new-file-to-json', async(req,res) => {
+  const item = { url: req.body.fileName }
+  addNewItem(item);
+  res.json({ ok : true });
+})
+async function addNewItem(item) {
+  const portfolioImgsListJson = await fsFile.readFile('downloads/imgs/imgs2.json', 'UTF-8');
+  const portfolioImgsListArr = JSON.parse(portfolioImgsListJson);
+  portfolioImgsListArr.push(item);
+  const newPortfolioImgsListJson = JSON.stringify(portfolioImgsListArr);
+  await fs.writeFile('downloads/imgs/imgs2.json', newPortfolioImgsListJson);
+}
+
+function createJson() {
+  const dir = 'downloads/imgs/';
+  let myImgs = [];
+  const files = fs.readdirSync(dir)
+  for (file of files) {
+    let objJson = {};
+    objJson.url = file;
+    myImgs.push(objJson);
+    const result = JSON.stringify(myImgs);
+    fs.writeFile('downloads/imgs/imgs2.json', result, (err) => {
+      if (err) throw err;
+      console.log('Saved!');
+    });
+  }
+}
+
+router.get('/deleteItem', async (req, res) => {
   //console.log(req.body, 'delete')
   const delited = req.body;
   // const newPortfolioImgsList = await fs.writeFile('downloads/imgs/imgs2.json', 'hello', function(err,data) {
@@ -37,7 +66,7 @@ router.get('/deleteItem', async(req, res) => {
   //res.status(200).json(JSON.parse(newPortfolioImgsList));
 })
 
-router.get('left', async(req, res) => {
+router.get('left', async (req, res) => {
   portfolioImgsList = await fs.writeFile('downloads/imgs/imgs.json', 'UTF-8');
   res.status(200).json(JSON.parse(portfolioImgsList));
 })
@@ -50,12 +79,12 @@ router.get('left', async(req, res) => {
 //   } catch (error) {
 //     console.log(error)
 //   }
-  
+
 // })
 router.post('/upload-img', function (req, res) {
   const name = req.body;
   console.log(name, 'req boy upload img')
-  res.json({ message: 'POST request to the homepage'})
+  res.json({ message: 'POST request to the homepage' })
 })
 
 //
@@ -68,15 +97,20 @@ router.post('/upload2', async (req, res) => {
     // var-s
     let productId = 'test';
     let load_type = req.body.load_type
-    let user_folder = './public/uploads' //+ productId
+    //let user_folder = './public/uploads' //+ productId
+    let user_folder = './downloads/imgs' //+ productId
+
     let path = user_folder + '/' + req.body.name
     // Logs
     console.log(req.body)
     // log(`req.body:`.info)
     // log('TYPE '.info, req.body.load_type)
     // create General Folder ?
-    if (!fs.existsSync('./public/uploads')) {
-      fs.mkdirSync('./public/uploads')
+    // if (!fs.existsSync('./public/uploads')) {
+    //   fs.mkdirSync('./public/uploads')
+    // }
+    if (!fs.existsSync('./downloads/imgs')) {
+      fs.mkdirSync('./downloads/imgs')
     }
     // create User Folder ?
     if (!fs.existsSync(user_folder)) {
@@ -109,7 +143,9 @@ router.post('/upload2', async (req, res) => {
           })
           throw err
         }
-        else res.json({ msg: 'success' })
+        else {
+          res.json({ msg: 'success' })
+        }
       })
     }
   } catch (err) {
