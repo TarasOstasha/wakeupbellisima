@@ -20,14 +20,17 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   constructor(private api: ApiService, private http: HttpClient) { }
 
   async ngOnInit() {
-    const fromServer: any = await this.api.getPortfolioImgs();
-    setTimeout(()=>{
-      this.appState.portfolioImg = fromServer;
+    this.reloadImg()
 
-    },2000)
+    // },500)
     //this.initFancy();
     $(".fancy").fancybox();
-    console.log(fromServer);
+  }
+
+  async reloadImg() {
+    const fromServer: any = await this.api.getPortfolioImgs();
+    // setTimeout(()=>{
+      this.appState.portfolioImg = fromServer;
   }
 
   // << -- fancybox -- >> \\
@@ -44,11 +47,17 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   }
   // << -- end fancybox -- >> \\
 
-  async delete(index) {
-    const currentImg = this.appState.portfolioImg.splice(index, 1);
-    const fromServer = await this.api.deleteFromJson(currentImg);
+  async delete(name) {
+    //console.log('working')
+    const fromServer = this.api.removeImg(name);
     console.log(fromServer);
   }
+
+  moveRight(index) {
+    const fromServer = this.api.move(index, 'right');
+    this.reloadImg();
+  }
+
   portfolioImg = []
   async moveLeft(index) {
     const currentImg = this.appState.portfolioImg.splice(index, 1);
@@ -61,9 +70,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   }
   
 
-  moveRight(index) {
 
-  }
 
   selectedFile: File = null;
 

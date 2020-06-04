@@ -45,9 +45,17 @@ export class ApiService {
     return this.http.get( url + 'deleteItem', item ).toPromise();
   }
 
-  slideLeft() {
-    return this.http.get(url + 'left').toPromise();
+  removeImg(name) {
+    return this.http.delete( url + `delete-img/${name}` ).toPromise();
   }
+
+  move(index, direction) {
+    this.http.post( url + 'move', {index, direction}, httpOptions ).toPromise();
+  }
+
+  // slideLeft() {
+  //   return this.http.get(url + 'left').toPromise();
+  // }
 
   // pickedImg(file) {
   //   console.log(file, 'file from api')

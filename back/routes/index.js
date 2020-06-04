@@ -21,10 +21,10 @@ router.get('/portfolio-imgs', async (req, res) => {
 })
 
 
-router.post('/add-new-file-to-json', async(req,res) => {
+router.post('/add-new-file-to-json', async (req, res) => {
   const item = { url: req.body.fileName }
   addNewItem(item);
-  res.json({ ok : true });
+  res.json({ ok: true });
 })
 async function addNewItem(item) {
   const portfolioImgsListJson = await fsFile.readFile('downloads/imgs/imgs2.json', 'UTF-8');
@@ -41,6 +41,8 @@ function createJson() {
   for (file of files) {
     let objJson = {};
     objJson.url = file;
+    const isJson = 'json' == file.split('.')[1];
+    if (isJson) continue;
     myImgs.push(objJson);
     const result = JSON.stringify(myImgs);
     fs.writeFile('downloads/imgs/imgs2.json', result, (err) => {
@@ -50,26 +52,57 @@ function createJson() {
   }
 }
 
-router.get('/deleteItem', async (req, res) => {
-  //console.log(req.body, 'delete')
-  const delited = req.body;
-  // const newPortfolioImgsList = await fs.writeFile('downloads/imgs/imgs2.json', 'hello', function(err,data) {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-  //   console.log(data);
-  // });
-  fs.writeFile('downloads/imgs/imgs2.json', delited, function (err) {
-    if (err) return console.log(err);
-    console.log('Hello World > helloworld.txt');
-  });
-  //res.status(200).json(JSON.parse(newPortfolioImgsList));
+// router.get('/deleteItem', async (req, res) => {
+//   //console.log(req.body, 'delete')
+//   const delited = req.body;
+//   // const newPortfolioImgsList = await fs.writeFile('downloads/imgs/imgs2.json', 'hello', function(err,data) {
+//   //   if (err) {
+//   //     return console.log(err);
+//   //   }
+//   //   console.log(data);
+//   // });
+//   fs.writeFile('downloads/imgs/imgs2.json', delited, function (err) {
+//     if (err) return console.log(err);
+//     console.log('Hello World > helloworld.txt');
+//   });
+//   //res.status(200).json(JSON.parse(newPortfolioImgsList));
+// })
+
+router.delete('/delete-img/:name', async (req, res) => {
+  try {
+    const fileName = req.params.name;
+    const myJson = await fsFile.readFile('downloads/imgs/imgs2.json', 'utf8');
+    const imgsArr = JSON.parse(myJson);
+    const newImgsArr = imgsArr.filter((item) => {
+      return item.url != fileName
+    })
+    await fsFile.writeFile('downloads/imgs/imgs2.json', JSON.stringify(newImgsArr));
+    const sourceUrls = 'downloads/imgs/' + fileName;
+    await fsFile.unlink(sourceUrls);
+    res.json({ ok: true, message: 'done' });
+  } catch (error) {
+    res.status(501).json({ ok: true });
+    console.error(error);
+  }
+
 })
 
-router.get('left', async (req, res) => {
-  portfolioImgsList = await fs.writeFile('downloads/imgs/imgs.json', 'UTF-8');
-  res.status(200).json(JSON.parse(portfolioImgsList));
+router.post('/move', async(req, res) => {
+  const direction = req.body.direction;
+  const index = req.body.index;
+  const myJson = await fsFile.readFile('downloads/imgs/imgs2.json', 'utf8');
+  const imgsArr = JSON.parse(myJson);
+  const currentImg = imgsArr.splice(index, 1);
+  if( direction == 'left' )  imgsArr.splice(index - 1, 0, currentImg);
+  if( direction == 'right' ) imgsArr.splice( index + 1, 0, currentImg );
+  await fsFile.writeFile('downloads/imgs/imgs2.json', JSON.stringify(imgsArr));
+
 })
+
+// router.get('left', async (req, res) => {
+//   portfolioImgsList = await fs.writeFile('downloads/imgs/imgs.json', 'UTF-8');
+//   res.status(200).json(JSON.parse(portfolioImgsList));
+// })
 
 // router.post('/upload-img', async(req, res) => {
 //   try {

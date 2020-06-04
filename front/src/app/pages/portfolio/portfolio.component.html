@@ -6,7 +6,7 @@
                 *ngFor="let img of appState.portfolioImg; let i = index;" data-width="800" data-height="600">
                 <li rel="group">
                     <img [src]=" url+ 'imgs/' + img.url ">
-                    <button (click)="delete(i)" *ngIf="appState.header.user.role == 'admin' " class="edit-admin delete">delete</button>
+                    <button (click)="delete(img.url)" *ngIf="appState.header.user.role == 'admin' " class="edit-admin delete">delete</button>
                     <button (click)="moveRight(i);" *ngIf="appState.header.user.role == 'admin' "
                         class="edit-admin right">move right</button>
                     <button (click)="moveLeft(i);" *ngIf="appState.header.user.role == 'admin' "
