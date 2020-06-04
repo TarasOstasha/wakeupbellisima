@@ -21,6 +21,7 @@ import { ApiService } from './services/api.service';
 import { StorageService } from './services/storage.service';
 import { FormValidatorComponent } from './parts/form-validator/form-validator.component';
 import { RedirectorComponent } from './pages/redirector/redirector.component';
+import { CarouselComponent } from './parts/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RedirectorComponent } from './pages/redirector/redirector.component';
     BookAppointmentComponent,
     AuthComponent,
     FormValidatorComponent,
-    RedirectorComponent
+    RedirectorComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,23 @@
+<ul class="carousel">
+    <div class="title-wrapper">
+        <div class="title">
+            <h1>
+                beautiful all day...
+                <br>
+                beautiful all night...    
+            </h1>
+            <a href="#join Us" class="portfolio-btn animated fadeInDown btn-4 topLink">
+                Join us
+            </a>
+        </div>
+    </div>
+    <li class="slides" *ngFor="let slideImg of imgSlides; let i = index;"
+        [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" >
+        <img [src]="slideImg.img" alt="slide image" class="slide" [style.width.px]="centerSlideWidth">
+    </li>
+
+    <div class="controls">
+        <div (click)="moveLeft()" class="control prev-slide"><i class="fa fa-angle-left"></i> </div>
+        <div (click)="moveRight()" class="control next-slide"><i class="fa fa-angle-right"></i></div>
+    </div>
+</ul>
