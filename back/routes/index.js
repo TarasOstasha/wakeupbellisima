@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const fsFile = require('fs').promises;
 const fs = require('fs');
+const nodemailer = require('nodemailer');
 
 const User = require('../models/users');
 //var cors = require('cors');
@@ -87,14 +88,14 @@ router.delete('/delete-img/:name', async (req, res) => {
 
 })
 
-router.post('/move', async(req, res) => {
+router.post('/move', async (req, res) => {
   const direction = req.body.direction;
   const index = req.body.index;
   const myJson = await fsFile.readFile('downloads/imgs/imgs2.json', 'utf8');
   const imgsArr = JSON.parse(myJson);
   const currentImg = imgsArr.splice(index, 1);
-  if( direction == 'left' )  imgsArr.splice(index - 1, 0, currentImg);
-  if( direction == 'right' ) imgsArr.splice( index + 1, 0, currentImg );
+  if (direction == 'left') imgsArr.splice(index - 1, 0, currentImg);
+  if (direction == 'right') imgsArr.splice(index + 1, 0, currentImg);
   await fsFile.writeFile('downloads/imgs/imgs2.json', JSON.stringify(imgsArr));
 
 })
@@ -233,5 +234,55 @@ router.get('/log-out', async (req, res) => {
   req.logout();
   res.json({ ok: true })
 })
+
+// contact me component
+router.post('/contacts-mail', async (req, res) => {
+  try {
+    console.log(req.body, 'contacts mail')
+    const recipient = req.body;
+    sendMail(recipient, info=>{
+      console.log(`${info}`);
+      res.json({ ok: true, msg: info })
+    })
+  } catch (error) {
+    console.log(error, 'something went wrong');
+    res.json('something went wrong on server');
+  }
+})
+
+ // nodemailer
+async function sendMail(recipient, callback) {
+    // step 1
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      //port: 465,
+      //secure: true, // use SSL
+      auth: {
+        // user: 'tdeveloper241@gmail.com',
+        // pass: 'december22@'
+        user: 'tonyjoss1990@gmail.com',
+        pass: 'ostasha19901102'
+      }
+    })
+    // step 2 
+    let mailOptions = {
+      from: recipient.email,
+      to: 'tonyjoss1990@gmail.com',
+      subject: recipient.subject,
+      html: recipient.message
+    }
+    //step 3
+    // send mail with defined transports object
+    let info = await transporter.sendMail(mailOptions);
+    callback(info)
+    
+    // another method step 3
+    // transporter.sendMail(mailoptions, function(err, data) {
+    //   if(err) console.log('Error!!!')
+    //   else console.log('Email sent!!!')
+    // })
+}
 
 module.exports = router;

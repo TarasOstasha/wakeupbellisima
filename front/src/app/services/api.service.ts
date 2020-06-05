@@ -52,6 +52,10 @@ export class ApiService {
   move(index, direction) {
     this.http.post( url + 'move', {index, direction}, httpOptions ).toPromise();
   }
+  // about me
+  contactsMail(mail) {
+    return this.http.post(url + 'contacts-mail', mail, httpOptions).toPromise();
+  }
 
   // slideLeft() {
   //   return this.http.get(url + 'left').toPromise();
