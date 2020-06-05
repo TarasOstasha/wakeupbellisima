@@ -3,6 +3,7 @@ var router = express.Router();
 const fsFile = require('fs').promises;
 const fs = require('fs');
 const nodemailer = require('nodemailer');
+require('dotenv').config()
 
 const User = require('../models/users');
 //var cors = require('cors');
@@ -108,21 +109,7 @@ router.post('/move', async (req, res) => {
   res.json({ ok: true });
 })
 
-// router.get('left', async (req, res) => {
-//   portfolioImgsList = await fs.writeFile('downloads/imgs/imgs.json', 'UTF-8');
-//   res.status(200).json(JSON.parse(portfolioImgsList));
-// })
 
-// router.post('/upload-img', async(req, res) => {
-//   try {
-//     const name = req.body;
-//     console.log(name, 'req boy upload img')
-//     res.json({ ok : true, message: 'img has been sent' })
-//   } catch (error) {
-//     console.log(error)
-//   }
-
-// })
 router.post('/upload-img', function (req, res) {
   const name = req.body;
   console.log(name, 'req boy upload img')
@@ -257,28 +244,30 @@ router.post('/contacts-mail', async (req, res) => {
     res.json('something went wrong on server');
   }
 })
-const details = require('../config/details.json');
-require('dotenv').config()
+//const details = require('../config/details.json');
+
 // nodemailer
 async function sendMail(recipient, callback) {
   // step 1
   let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    //port: 465,
-    //secure: true, // use SSL
+    // port: 587,
+    // secure: false,
+    port: 465,
+    secure: true, // use SSL
     auth: {
       // user: 'tdeveloper241@gmail.com',
       // pass: 'december22@'
       user: process.env.EMAIL,
       pass: process.env.PASSWORD
+      // user: 'tonyjoss1990@gmail.com',
+      // pass: 'ostasha19901102'
     }
   })
   // step 2 
   let mailOptions = {
-    from: recipient.email,
-    to: 'tonyjoss1990@gmail.com',
+    from: 'tonyjoss1990@gmail.com', // sender address
+    to: recipient.email, // list of receivers
     subject: recipient.subject,
     html: recipient.message
   }
