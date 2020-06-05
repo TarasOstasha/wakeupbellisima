@@ -2,25 +2,29 @@
 <div class="wrapper">
     <div class="container">
         <ul class="row" id="grid-container">
-            <a class="col-md-4" data-fancybox="gallery" rel="group" [href]=" url + 'imgs/' + img.url "
-                *ngFor="let img of appState.portfolioImg; let i = index;" data-width="800" data-height="600">
-                <li rel="group">
-                    <img [src]=" url+ 'imgs/' + img.url ">
-                    <button (click)="delete(img.url)" *ngIf="appState.header.user.role == 'admin' " class="edit-admin delete">delete</button>
-                    <button (click)="moveRight(i);" *ngIf="appState.header.user.role == 'admin' "
-                        class="edit-admin right">move right</button>
-                    <button (click)="moveLeft(i);" *ngIf="appState.header.user.role == 'admin' "
-                        class="edit-admin left">move left</button>
-                </li>
-            </a>            
+            <div class="col-md-4" *ngFor="let img of appState.portfolioImg; let i = index;">
+                <a  data-fancybox="gallery" rel="group" [href]=" url + 'imgs/' + img.url "
+                    data-width="800" data-height="600">
+                    <li rel="group">
+                        <img [src]=" url+ 'imgs/' + img.url ">
+                    </li>
+                </a>
+                <button (click)="delete(img.url)" *ngIf="appState.header.user.role == 'admin' "
+                    class="edit-admin delete">delete</button>
+                <button (click)="moveRight(i);" *ngIf="appState.header.user.role == 'admin' "
+                    class="edit-admin right">move right</button>
+                <button (click)="moveLeft(i);" *ngIf="appState.header.user.role == 'admin' "
+                    class="edit-admin left">move left</button>
+            </div>
+
         </ul>
     </div>
     <!-- UPLOAD PICTURE METHOD 2 -->
     <button (click)="fileInput.click()">Pick File</button>
-    <button (click)="filePicker()" >Add Img</button>
+    <button (click)="filePicker()">Add Img</button>
     <input style="display:none" #fileInput type="file" (change)="onImagePicked($event)">
 
-    
+
     <!-- UPLOAD PIC -->
     <!-- <div class="input-pic upload-img"> -->
     <!-- <input id="upload" type="file" (change)="onChange($event)" class="form-control" multiple="multiple"> -->
@@ -49,12 +53,13 @@
                         product
                         card</div>
                 </div> -->
-                
+
                 <!-- PROGRESS BAR -->
                 <div class="progress" *ngIf="progressBarPercent !== 0;">
-                  <div class="progress-bar" [style.background]=" (progressBarPercent == 100) ? 'green':'blue' " role="progressbar"
-                    [style.width]="progressBarPercent + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                    {{ progressBarPercent }} %</div>
+                    <div class="progress-bar" [style.background]=" (progressBarPercent == 100) ? 'green':'blue' "
+                        role="progressbar" [style.width]="progressBarPercent + '%'" aria-valuenow="25" aria-valuemin="0"
+                        aria-valuemax="100">
+                        {{ progressBarPercent }} %</div>
                 </div>
                 <i (click)='appState.previews.splice(i,1)' class="fa fa-window-close close-window"
                     aria-hidden="true"></i>

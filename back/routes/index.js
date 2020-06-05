@@ -32,7 +32,7 @@ async function addNewItem(item) {
   const portfolioImgsListArr = JSON.parse(portfolioImgsListJson);
   portfolioImgsListArr.push(item);
   const newPortfolioImgsListJson = JSON.stringify(portfolioImgsListArr);
-  await fs.writeFile('downloads/imgs/imgs2.json', newPortfolioImgsListJson);
+  await fsFile.writeFile('downloads/imgs/imgs2.json', newPortfolioImgsListJson);
 }
 
 function createJson() {
@@ -89,15 +89,19 @@ router.delete('/delete-img/:name', async (req, res) => {
 })
 
 router.post('/move', async (req, res) => {
+  console.log(req.body)
   const direction = req.body.direction;
   const index = req.body.index;
   const myJson = await fsFile.readFile('downloads/imgs/imgs2.json', 'utf8');
   const imgsArr = JSON.parse(myJson);
-  const currentImg = imgsArr.splice(index, 1);
+  console.log('testing!!!!');
+  //if(index == imgsArr.length-1 || index == imgsArr[0]) return res.json({ ok: true, msg: 'the picture cannot be moved!!!' })
+  const currentImg = imgsArr.splice(index, 1)[0];
+  console.log(currentImg, 'currentImg');
   if (direction == 'left') imgsArr.splice(index - 1, 0, currentImg);
   if (direction == 'right') imgsArr.splice(index + 1, 0, currentImg);
   await fsFile.writeFile('downloads/imgs/imgs2.json', JSON.stringify(imgsArr));
-
+  res.json({ ok: true });
 })
 
 // router.get('left', async (req, res) => {
@@ -249,7 +253,8 @@ router.post('/contacts-mail', async (req, res) => {
     res.json('something went wrong on server');
   }
 })
-
+const details = require('../config/details.json');
+require('dotenv').config()
  // nodemailer
 async function sendMail(recipient, callback) {
     // step 1
@@ -262,8 +267,8 @@ async function sendMail(recipient, callback) {
       auth: {
         // user: 'tdeveloper241@gmail.com',
         // pass: 'december22@'
-        user: 'tonyjoss1990@gmail.com',
-        pass: 'ostasha19901102'
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
       }
     })
     // step 2 
@@ -277,7 +282,7 @@ async function sendMail(recipient, callback) {
     // send mail with defined transports object
     let info = await transporter.sendMail(mailOptions);
     callback(info)
-    
+
     // another method step 3
     // transporter.sendMail(mailoptions, function(err, data) {
     //   if(err) console.log('Error!!!')

@@ -50,7 +50,8 @@ export class ApiService {
   }
 
   move(index, direction) {
-    this.http.post( url + 'move', {index, direction}, httpOptions ).toPromise();
+    console.log('move')
+    return this.http.post( url + 'move', {index, direction}, httpOptions ).toPromise();
   }
   // about me
   contactsMail(mail) {

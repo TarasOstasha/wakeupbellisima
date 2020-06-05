@@ -29,8 +29,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
   async reloadImg() {
     const fromServer: any = await this.api.getPortfolioImgs();
-    // setTimeout(()=>{
-      this.appState.portfolioImg = fromServer;
+    this.appState.portfolioImg = fromServer;
   }
 
   // << -- fancybox -- >> \\
@@ -53,9 +52,13 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     console.log(fromServer);
   }
 
-  moveRight(index) {
-    const fromServer = this.api.move(index, 'right');
-    this.reloadImg();
+  async moveRight(index) {
+    const fromServer: any = await this.api.move(index, 'right');
+    console.log(fromServer);
+    // setTimeout(() => {
+      this.reloadImg();
+    // },500)
+    
   }
 
   portfolioImg = []
@@ -190,6 +193,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         if (this.fileQuantity >= this.fileCounter) { this.uploadNextFile(); }
         //alert('success')
         await this.api.addNewFileToJson(file.name);
+        this.reloadImg();
         swal.fire({
           title: "Good job!",
           text: "File successfully added",
