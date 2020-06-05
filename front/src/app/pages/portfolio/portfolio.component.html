@@ -5,8 +5,8 @@
             <div class="col-md-4" *ngFor="let img of appState.portfolioImg; let i = index;">
                 <a  data-fancybox="gallery" rel="group" [href]=" url + 'imgs/' + img.url "
                     data-width="800" data-height="600">
-                    <li rel="group">
-                        <img [src]=" url+ 'imgs/' + img.url ">
+                    <li rel="group" [style.backgroundImage]="'url('+ url + 'imgs/' + img.url +')'">
+                        <!-- <img [src]=" url+ 'imgs/' + img.url "> -->
                     </li>
                 </a>
                 <button (click)="delete(img.url)" *ngIf="appState.header.user.role == 'admin' "
@@ -19,41 +19,11 @@
 
         </ul>
     </div>
-    <!-- UPLOAD PICTURE METHOD 2 -->
-    <button (click)="fileInput.click()">Pick File</button>
-    <button (click)="filePicker()">Add Img</button>
-    <input style="display:none" #fileInput type="file" (change)="onImagePicked($event)">
-
-
-    <!-- UPLOAD PIC -->
-    <!-- <div class="input-pic upload-img"> -->
-    <!-- <input id="upload" type="file" (change)="onChange($event)" class="form-control" multiple="multiple"> -->
-    <!-- <img [src]="appState.previews.reader.result" alt="Image preview..." class="img-fluid mh-100 mw-100 img"> -->
-    <!-- <div class="mark-main-photo" *ngIf='preview.main'>
-            <i class="fa fa-home" aria-hidden="true"></i>
-            main photo
-        </div> -->
-    <!-- <div class="overlay">
-            <div class="text">Press <button (click)="checkMainPhoto(i)">Set</button> to set first photo in product
-                card</div>
-        </div>
-        <i (click)='state.previews.splice(i,1)' class="fa fa-window-close close-window" aria-hidden="true"></i> -->
     <div class="row">
         <div class="choose-img col-md-4" *ngFor="let preview of appState.previews; let i = index;">
-            <!-- {{ i }} -->
             <div class="input-pic upload-img">
                 <input id="upload" type="file" (change)="onChange($event)" class="form-control" multiple="multiple">
                 <img [src]="preview.reader.result" alt="Image preview..." class="img-fluid mh-100 mw-100 img">
-                <!-- <div class="mark-main-photo" *ngIf='preview.main'>
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                    main photo
-                </div> -->
-                <!-- <div class="overlay">
-                    <div class="text">Press <button (click)="checkMainPhoto(i)">Set</button> to set first photo in
-                        product
-                        card</div>
-                </div> -->
-
                 <!-- PROGRESS BAR -->
                 <div class="progress" *ngIf="progressBarPercent !== 0;">
                     <div class="progress-bar" [style.background]=" (progressBarPercent == 100) ? 'green':'blue' "
@@ -65,12 +35,6 @@
                     aria-hidden="true"></i>
             </div>
         </div>
-
-        `
-        <!-- <button (click)="sendImg()">Send IMG</button> -->
     </div>
-
-
-    <!-- </div> -->
 </div>
 <app-footer></app-footer>

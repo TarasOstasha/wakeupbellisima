@@ -95,7 +95,11 @@ router.post('/move', async (req, res) => {
   const myJson = await fsFile.readFile('downloads/imgs/imgs2.json', 'utf8');
   const imgsArr = JSON.parse(myJson);
   console.log('testing!!!!');
-  //if(index == imgsArr.length-1 || index == imgsArr[0]) return res.json({ ok: true, msg: 'the picture cannot be moved!!!' })
+  if (index == imgsArr.length - 1 && direction == 'right'
+    || index == 0 && direction == 'left') {
+    return res.json({ ok: true, msg: 'the picture cannot be moved!!!' })
+
+  }
   const currentImg = imgsArr.splice(index, 1)[0];
   console.log(currentImg, 'currentImg');
   if (direction == 'left') imgsArr.splice(index - 1, 0, currentImg);
@@ -244,7 +248,7 @@ router.post('/contacts-mail', async (req, res) => {
   try {
     console.log(req.body, 'contacts mail')
     const recipient = req.body;
-    sendMail(recipient, info=>{
+    sendMail(recipient, info => {
       console.log(`${info}`);
       res.json({ ok: true, msg: info })
     })
@@ -255,39 +259,39 @@ router.post('/contacts-mail', async (req, res) => {
 })
 const details = require('../config/details.json');
 require('dotenv').config()
- // nodemailer
+// nodemailer
 async function sendMail(recipient, callback) {
-    // step 1
-    let transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      //port: 465,
-      //secure: true, // use SSL
-      auth: {
-        // user: 'tdeveloper241@gmail.com',
-        // pass: 'december22@'
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD
-      }
-    })
-    // step 2 
-    let mailOptions = {
-      from: recipient.email,
-      to: 'tonyjoss1990@gmail.com',
-      subject: recipient.subject,
-      html: recipient.message
+  // step 1
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    //port: 465,
+    //secure: true, // use SSL
+    auth: {
+      // user: 'tdeveloper241@gmail.com',
+      // pass: 'december22@'
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
     }
-    //step 3
-    // send mail with defined transports object
-    let info = await transporter.sendMail(mailOptions);
-    callback(info)
+  })
+  // step 2 
+  let mailOptions = {
+    from: recipient.email,
+    to: 'tonyjoss1990@gmail.com',
+    subject: recipient.subject,
+    html: recipient.message
+  }
+  //step 3
+  // send mail with defined transports object
+  let info = await transporter.sendMail(mailOptions);
+  callback(info)
 
-    // another method step 3
-    // transporter.sendMail(mailoptions, function(err, data) {
-    //   if(err) console.log('Error!!!')
-    //   else console.log('Email sent!!!')
-    // })
+  // another method step 3
+  // transporter.sendMail(mailoptions, function(err, data) {
+  //   if(err) console.log('Error!!!')
+  //   else console.log('Email sent!!!')
+  // })
 }
 
 module.exports = router;

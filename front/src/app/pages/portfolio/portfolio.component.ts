@@ -20,16 +20,14 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   constructor(private api: ApiService, private http: HttpClient) { }
 
   async ngOnInit() {
-    this.reloadImg()
-
-    // },500)
-    //this.initFancy();
-    $(".fancy").fancybox();
+    this.reloadImg();
   }
 
   async reloadImg() {
+    this.destroyFancy();
     const fromServer: any = await this.api.getPortfolioImgs();
     this.appState.portfolioImg = fromServer;
+    //$(".fancy").fancybox();
   }
 
   // << -- fancybox -- >> \\
@@ -41,13 +39,16 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    //jQuery(".fancybox").unbind('click.fb');
+    this.destroyFancy();
+    //$(".fancybox").unbind('click.fb');
     // or maybe jQuery(".fancybox").off() to remove all bindings
+  }
+  destroyFancy() {
+    // $(".fancybox").unbind('click.fb');
   }
   // << -- end fancybox -- >> \\
 
   async delete(name) {
-    //console.log('working')
     const fromServer = this.api.removeImg(name);
     console.log(fromServer);
   }
@@ -55,24 +56,13 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   async moveRight(index) {
     const fromServer: any = await this.api.move(index, 'right');
     console.log(fromServer);
-    // setTimeout(() => {
-      this.reloadImg();
-    // },500)
-    
+    this.reloadImg();
   }
-
-  portfolioImg = []
   async moveLeft(index) {
-    const currentImg = this.appState.portfolioImg.splice(index, 1);
-    console.log(currentImg, '**currentImg**')
-    this.portfolioImg = this.appState.portfolioImg.splice(index-1, 0, currentImg);
-    console.log(this.portfolioImg,'*portfolioImg*')
-    //const fromServer:any  = await this.api.slideLeft();
-    //this.appState.portfolioImg = fromServer;
-
+    const fromServer: any = await this.api.move(index, 'left');
+    console.log(fromServer);
+    this.reloadImg();
   }
-  
-
 
 
   selectedFile: File = null;
@@ -91,27 +81,27 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       reportProgress: true,
       observe: 'events'
     }).subscribe((event) => {
-      if( event.type == HttpEventType.UploadProgress ) {
-        console.log('Upload Progress: ' + Math.round(event.loaded / event.total * 100 ) + '%')
-      }else if( event.type == HttpEventType.Response ) console.log(event)
-      
+      if (event.type == HttpEventType.UploadProgress) {
+        console.log('Upload Progress: ' + Math.round(event.loaded / event.total * 100) + '%')
+      } else if (event.type == HttpEventType.Response) console.log(event)
+
     })
     //const fromServer: any = this.api.pickedImg(fd);
     //console.log(fromServer);
   }
 
-  
+
 
   // upload files
 
-    // FILE UPLOADER - BEGIN
-    upload_i // counter
-    times; //time
-    max_size_req = 10000//99999
-    uploaded;
-    fileQuantity;
-    fileCounter;
-    files: any = {};
+  // FILE UPLOADER - BEGIN
+  upload_i // counter
+  times; //time
+  max_size_req = 10000//99999
+  uploaded;
+  fileQuantity;
+  fileCounter;
+  files: any = {};
 
   onChange() {
     this.files = (<HTMLInputElement>document.getElementById('upload')).files;  // file == {  name: "OhdIJZy8H7o.jpg", lastModified: 1467921666657,  lastModifiedDate: Date 2016-07-07T20:01:06.657Z,  size: 214450,  type: "image/jpeg"   }
@@ -131,7 +121,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     //log('file', file)
     //log('file size', file.size)
     //log('TIMES:::::: ', times)
-   /// this.appState.currentNewProductImg = 'http://localhost/uploads/img' + file.name;
+    /// this.appState.currentNewProductImg = 'http://localhost/uploads/img' + file.name;
     //preview
     //const preview: any = document.querySelector('img');
     for (let i = 0; i < this.files.length; i++) {
