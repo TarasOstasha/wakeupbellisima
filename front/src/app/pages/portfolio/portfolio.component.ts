@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from '../../services/api.service';
 import appState from '../../appState';
 
 declare var jQuery: any
@@ -114,7 +114,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   fileCounter;
   files: any = {};
 
-  onChange() {
+  onChange(el) {
     this.files = (<HTMLInputElement>document.getElementById('upload')).files;  // file == {  name: "OhdIJZy8H7o.jpg", lastModified: 1467921666657,  lastModifiedDate: Date 2016-07-07T20:01:06.657Z,  size: 214450,  type: "image/jpeg"   }
     this.uploaded = 0
     this.upload_i = 0

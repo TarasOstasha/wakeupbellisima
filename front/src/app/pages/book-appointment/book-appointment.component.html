@@ -87,16 +87,17 @@
         <!--Section: Contact v.2-->
         <div class="location">
             <div id="map">
-                <google-map 
+                <!-- <google-map 
                     height="500px" 
                     width="100%" 
                     [zoom]="zoom" 
                     [center]="center" 
                     [options]="options">
-                </google-map>
+                </google-map> -->
                 <!-- Use custom zoom buttons -->
-                <button (click)="zoomIn()">Zoom in</button>
-                <button (click)="zoomOut()">Zoom out</button>
+               <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChooseLocation($event)">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+               </agm-map>
             </div>
         </div>
     </div>

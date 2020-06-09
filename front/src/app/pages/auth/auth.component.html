@@ -2,8 +2,8 @@
 <div class="auth-block" [ngSwitch]="appState.state_form">
     <!-- SIGN IN -->
     <form class="box" *ngSwitchCase=" 'login' " [formGroup]="authForm">
-        <h1>Sign in  {{ userStorage }}</h1>
-
+        <!-- <h1>Sign in  {{ userStorage }}</h1> -->
+        <h1>Sign In</h1>
         <input class="form-control" type="text" placeholder="Email" name="email" formControlName="email">
         <app-form-validator [it]="authForm.get('email')"></app-form-validator>
         
@@ -16,7 +16,7 @@
 
     <!-- SIGN UP -->
     <form class="box" *ngSwitchCase=" 'register' " [formGroup]="authForm">
-        <h1>Sign up</h1>
+        <h1>Sign Up</h1>
         
         <input class="form-control" type="text" placeholder="Username" name="username" formControlName="userName">
         <app-form-validator [it]="authForm.get('userName')"></app-form-validator>
