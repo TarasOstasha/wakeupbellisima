@@ -21,6 +21,17 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
   async ngOnInit() {
     this.reloadImg();
+    // lazy img loading \\
+    const imageObserver = new IntersectionObserver((entries, imgObserver) => {
+      entries.forEach((entry: any) => {
+        const lazyImage = entry.target;
+        if (entry.isIntersecting) lazyImage.src = lazyImage.dataset.image;
+      })
+    });
+    document.querySelectorAll('img').forEach((v) => { // must change queryselector cos we use bg imgs
+      imageObserver.observe(v);
+    })
+    // end lazy loading \\
   }
 
   async reloadImg() {

@@ -36,6 +36,12 @@ export class BookAppointmentComponent implements OnInit {
 
   ngOnInit() {
     // SWAL !!!!!!
+    navigator.geolocation.getCurrentPosition(position => {
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+    })
   }
 
   //check email
@@ -92,4 +98,64 @@ export class BookAppointmentComponent implements OnInit {
   get email() { return this.contactsForm.get('email') }
   get subject() { return this.contactsForm.get('subject') }
   get message() { return this.contactsForm.get('message') }
+
+
+
+
+
+  //google maps//
+// function initMap() {
+
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//       zoom: 10,
+//       center: { lat: 40.9220642, lng: -74.0705113 }
+//   });
+
+//   // Create an array of alphabetical characters used to label the markers.
+//   var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+//   // Add some markers to the map.
+//   // Note: The code uses the JavaScript Array.prototype.map() method to
+//   // create an array of markers based on a given "locations" array.
+//   // The map() method here has nothing to do with the Google Maps API.
+//   var markers = locations.map(function (location, i) {
+//       return new google.maps.Marker({
+//           position: location,
+//           label: labels[i % labels.length]
+//       });
+//   });
+
+//   // Add a marker clusterer to manage the markers.
+//   var markerCluster = new MarkerClusterer(map, markers,
+//       { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+// }
+// var locations = [
+//   // {lat: 40.9220642, lng: -74.0705113},
+//   { lat: 40.7449771, lng: -73.9874335 }
+
+// ];
+
+zoom = 12
+center: google.maps.LatLngLiteral
+options: google.maps.MapOptions = {
+  mapTypeId: 'hybrid',
+  zoomControl: false,
+  scrollwheel: false,
+  disableDoubleClickZoom: true,
+  maxZoom: 15,
+  minZoom: 8,
+}
+
+zoomIn() {
+  if (this.zoom < this.options.maxZoom) this.zoom++
+}
+
+zoomOut() {
+  if (this.zoom > this.options.minZoom) this.zoom--
+}
+
+
+
+
+
 }

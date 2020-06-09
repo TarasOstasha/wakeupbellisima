@@ -15,6 +15,7 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 // services
 import { ApiService } from './services/api.service';
@@ -44,7 +45,8 @@ import { CarouselComponent } from './parts/carousel/carousel.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleMapsModule
   ],
   providers: [ApiService, StorageService],
   bootstrap: [AppComponent]
