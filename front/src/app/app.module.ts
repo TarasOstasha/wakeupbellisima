@@ -23,6 +23,7 @@ import { StorageService } from './services/storage.service';
 import { FormValidatorComponent } from './parts/form-validator/form-validator.component';
 import { RedirectorComponent } from './pages/redirector/redirector.component';
 import { CarouselComponent } from './parts/carousel/carousel.component';
+import { StarRatingComponent } from './parts/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CarouselComponent } from './parts/carousel/carousel.component';
     AuthComponent,
     FormValidatorComponent,
     RedirectorComponent,
-    CarouselComponent
+    CarouselComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,

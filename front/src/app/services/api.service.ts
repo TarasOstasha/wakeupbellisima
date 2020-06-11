@@ -58,16 +58,14 @@ export class ApiService {
     return this.http.post(url + 'contacts-mail', mail, httpOptions).toPromise();
   }
 
-  // slideLeft() {
-  //   return this.http.get(url + 'left').toPromise();
-  // }
+  // set review
+  reviewMsg(msg) {
+    return this.http.post(url + 'review-msg', msg, httpOptions).toPromise();
+  }
+  // get review
+  getMsgsReview() {
+    return this.http.get( url + 'review-msgs' ).toPromise();
+  }
 
-  // pickedImg(file) {
-  //   console.log(file, 'file from api')
-  //   return this.http.post( url + 'upload-img', file, {
-  //     reportProgress: true,
-  //     observe: 'events'
-  //   } ).toPromise();
-  //}
   
 }

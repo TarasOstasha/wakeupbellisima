@@ -5,7 +5,9 @@ const fs = require('fs');
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 
+// mongoose
 const User = require('../models/users');
+const ReviewMessage = require('../models/review');
 //var cors = require('cors');
 //let portfolioImgsList;
 
@@ -244,6 +246,32 @@ router.post('/contacts-mail', async (req, res) => {
     res.json('something went wrong on server');
   }
 })
+
+// create review-msg
+router.post('/review-msg', async(req, res) => {
+  try {
+    console.log(req.body, 'review mail')
+  //const msg = await ReviewMessage.find({});
+
+    const new_review_msg = new ReviewMessage({
+      nameReview: req.body.nameReview,
+      emailReview: req.body.emailReview,
+      messageReview: req.body.messageReview,
+      dataReview: req.body.created
+    });
+    new_review_msg.save();
+    res.json({ ok: true, data:  new_review_msg })
+  } catch (error) {
+    console.log(error, 'something went wrong');
+    res.json('something went wrong on server');
+  }
+})
+// get review-msgs
+router.get('/review-msgs', async(req, res) => {
+  const msg = await ReviewMessage.find();
+  res.json({ ok: true, msg: msg })
+});
+
 //const details = require('../config/details.json');
 
 // nodemailer

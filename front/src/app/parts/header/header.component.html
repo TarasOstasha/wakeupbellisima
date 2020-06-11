@@ -24,9 +24,18 @@
         </ul>
         <!-- Social Media & Authentication -->
         <ul class="navbar-nav nav-flex-icons">
+
+            <!-- <li class="nav-item sign-in" 
+                (click)="toLogin()">
+                <a class="nav-link" *ngIf="appState.header.user == null ">
+                    Login
+                    <i class="fa fa-sign-in"></i>
+                </a>
+            </li> -->
+
             <li class="nav-item sign-in" 
                 (click)="toLogin()" 
-                *ngIf="!appState.header.user.isLogged  ">
+                *ngIf="!appState.header.user.isLogged">
                 <a class="nav-link">
                     Login
                     <i class="fa fa-sign-in"></i>

@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(appState.header.user)
+    //if(appState.header.isLogged == false) { alert('null') } 
     //appState.header.user.userName = this.storage.getItem('user');
     appState.header.user = this.storage.getItem('user');
 

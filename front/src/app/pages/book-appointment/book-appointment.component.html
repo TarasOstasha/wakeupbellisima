@@ -86,24 +86,54 @@
         </section>
         <!--Section: Contact v.2-->
         <div class="location">
-            <div id="map">
-                <!-- <google-map 
+            <!-- <div id="map"> -->
+            <!-- <google-map 
                     height="500px" 
                     width="100%" 
                     [zoom]="zoom" 
                     [center]="center" 
                     [options]="options">
                 </google-map> -->
-                <!-- Use custom zoom buttons -->
-               <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChooseLocation($event)">
+            <!-- Use custom zoom buttons -->
+            <!-- <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onChooseLocation($event)">
                     <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-               </agm-map>
+               </agm-map> -->
+            <!-- </div> -->
+            <div id="map">
+                <agm-map 
+                    [latitude]="lat" 
+                    [longitude]="lng" 
+                    [zoom]="zoom" 
+                    [disableDefaultUI]="false"
+                    [zoomControl]="false" 
+                    (mapClick)="mapClicked($event)">
+
+                    <agm-marker 
+                        *ngFor="let m of markers; let i = index" 
+                        (markerClick)="clickedMarker(m.label, i)"
+                        [latitude]="m.lat" 
+                        [longitude]="m.lng" 
+                        [label]="m.label" 
+                        [markerDraggable]="m.draggable"
+                        (dragEnd)="markerDragEnd(m, $event)">
+
+                        <agm-info-window>
+                            <strong>InfoWindow content</strong>
+                        </agm-info-window>
+
+                    </agm-marker>
+
+                    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'"
+                        [circleDraggable]="true" [editable]="true">
+                    </agm-circle>
+
+                </agm-map>
             </div>
             <div class="location-info">
-                    You may use the contact form, by phone at 973-330-2608 or 973-845-8803
-                    mail: <a href="mailto:nataliya.hocko@gmail.com">nataliya.hocko@gmail.com</a> 
-                    SoloPerTe Skin Care Center
-                    11-19 River Rd, Fair Lawn, NJ 07410
+                You may use the contact form, by phone at 973-330-2608 
+                mail: <a href="mailto:nataliya.hocko@gmail.com">nataliya.hocko@gmail.com</a><br>
+                Wake Up Bellisima
+                2nd Street, Carlstadt, NJ 07072
             </div>
         </div>
     </div>

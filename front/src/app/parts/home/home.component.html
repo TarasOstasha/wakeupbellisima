@@ -6,22 +6,76 @@
         <div class="main-info">
             <h1>WHAT IS PERMANENT MAKEUP?</h1>
             <p class="text">
-                    Permanent makeup, also known as Intradermal Pigmentation,
-                    is a revolutionary method of applying natural pigments into the dermal layer of skin.
-                    This state-of-the-art technique is medically proven and specifically designed to be completely safe.
-                    Permanent makeup is used for a variety of cosmetic enhancements such as permanent eyebrows,
-                    eye liner, and lip liner/color. Other permanent makeup procedures include vitiligo,
-                    scar camouflage, areola restoration, hairline enhancement, and more.
-                    Permanent makeup has also been used to cover-up stretchmarks, birthmarks,
-                    freckles/age spots, and uneven skin discolorations.
+                Permanent makeup, also known as Intradermal Pigmentation,
+                is a revolutionary method of applying natural pigments into the dermal layer of skin.
+                This state-of-the-art technique is medically proven and specifically designed to be completely safe.
+                Permanent makeup is used for a variety of cosmetic enhancements such as permanent eyebrows,
+                eye liner, and lip liner/color. Other permanent makeup procedures include vitiligo,
+                scar camouflage, areola restoration, hairline enhancement, and more.
+                Permanent makeup has also been used to cover-up stretchmarks, birthmarks,
+                freckles/age spots, and uneven skin discolorations.
             </p>
         </div>
         <div class="google-review-wrapper">
             <h2>Reviews</h2>
             <div class="reviews-container">
                 <div id="google-reviews">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam debitis, repudiandae non sapiente quasi eos commodi omnis, nemo eaque illum magni! Corrupti, totam aliquam dolorum in accusamus repudiandae illo et.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam debitis, repudiandae non sapiente
+                    quasi eos commodi omnis, nemo eaque illum magni! Corrupti, totam aliquam dolorum in accusamus
+                    repudiandae illo et.
                 </div>
+
+            </div>
+            <div class="write-reviews">
+                {{ reviewMsg.nameReview }}
+                <div class="custom-reviews">
+                    <h2 (click)="openReview()">
+                        Live a review &nbsp;
+                        <i class="fa fa-plus" *ngIf="!review"></i>
+                        <i class="fa fa-minus" *ngIf="review"></i>
+                    </h2>
+                </div>
+                <form (ngSubmit)="sendReview()" [formGroup]="reviewForm" id="reviewForm" name="reviewForm" *ngIf="review">
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <input formControlName="nameReview" type="text" id="name" name="name"
+                                    class="form-control">
+                                <label for="nameReview" class="">Your name</label>
+                                <app-form-validator [it]="name"></app-form-validator>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <input formControlName="emailReview" type="text" id="email" name="email"
+                                    class="form-control">
+                                <label for="Review" class="">Your email</label>
+                                <app-form-validator [it]="email"></app-form-validator>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <app-star-rating></app-star-rating>
+                            Rate your master
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <textarea formControlName="messageReview" type="text" id="message"
+                                    name="message" rows="2" class="form-control md-textarea"></textarea>
+                                <label for="messageReview">Your message</label>
+                                <app-form-validator [it]="message"></app-form-validator>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary" type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   constructor(private api: ApiService, private http: HttpClient) { }
 
   async ngOnInit() {
+    console.log(appState)
     this.reloadImg();
     // lazy img loading \\
     const imageObserver = new IntersectionObserver((entries, imgObserver) => {

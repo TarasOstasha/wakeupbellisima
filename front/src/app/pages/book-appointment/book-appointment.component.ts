@@ -3,6 +3,8 @@ import appState from '../../appState';
 import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 declare var swal: any;
+import { MouseEvent } from '@agm/core';
+import { Marker } from '../../interfaces/marker';
 
 @Component({
   selector: 'app-book-appointment',
@@ -95,13 +97,67 @@ export class BookAppointmentComponent implements OnInit {
 
 
   //google maps//
-latitude: 40.84004824998276; // Carlstadt
-longitude: -74.0906907105334;
+// latitude: 40.84004824998276; // Carlstadt
+// longitude: -74.0906907105334;
 
-onChooseLocation(event) {
-  this.latitude = event.coords.lat;
-  this.longitude = event.coords.lng;
-  console.log(event);
+// onChooseLocation(event) {
+//   this.latitude = event.coords.lat;
+//   this.longitude = event.coords.lng;
+//   console.log(event);
+// }
+
+
+
+////////////
+// google maps zoom level
+zoom: number = 15;
+  
+// initial center position for the map
+lat: number = 40.84004824998276;
+lng: number = -74.0906907105334;
+
+clickedMarker(label: string, index: number) {
+  console.log(`clicked the marker: ${label || index}`)
 }
 
+mapClicked($event: MouseEvent) {
+  this.markers.push({
+    lat: $event.coords.lat,
+    lng: $event.coords.lng,
+    draggable: true
+  });
 }
+
+markerDragEnd(m: Marker, $event: MouseEvent) {
+  console.log('dragEnd', m, $event);
+}
+
+markers: Marker[] = [
+  {
+    lat: 40.84004824998276,
+    lng: -74.0906907105334,
+    label: 'wakeupbellisima',
+    draggable: true
+  },
+  // you can create more markers
+  // {
+  //   lat: 51.373858,
+  //   lng: 7.215982,
+  //   label: 'B',
+  //   draggable: false
+  // },
+  // {
+  //   lat: 51.723858,
+  //   lng: 7.895982,
+  //   label: 'C',
+  //   draggable: true
+  // }
+]
+}
+// just an interface for type safety.
+// interface marker {
+// 	lat: number;
+// 	lng: number;
+// 	label?: string;
+// 	draggable: boolean;
+// }
