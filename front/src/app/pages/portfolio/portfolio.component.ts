@@ -22,33 +22,43 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   async ngOnInit() {
     console.log(appState)
     this.reloadImg();
-    // lazy img loading \\
-    const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-      entries.forEach((entry: any) => {
-        const lazyImage = entry.target;
-        if (entry.isIntersecting) lazyImage.src = lazyImage.dataset.image;
+    this.lazyInit();
+  }
+
+  lazyInit() {
+    setTimeout(() => {
+      // lazy img loading \\
+      const imageObserver = new IntersectionObserver((entries, imgObserver) => {
+        entries.forEach((entry: any) => {
+          const lazyImage = entry.target;
+          //if (entry.isIntersecting) lazyImage.src = lazyImage.dataset.image;
+          console.log(lazyImage.dataset.img)
+          if (entry.isIntersecting) lazyImage.style.backgroundImage = lazyImage.dataset.img;
+        })
+      });
+      document.querySelectorAll('.slide-img').forEach((v) => { // must change queryselector cos we use bg imgs
+        imageObserver.observe(v);
       })
-    });
-    document.querySelectorAll('img').forEach((v) => { // must change queryselector cos we use bg imgs
-      imageObserver.observe(v);
-    })
-    // end lazy loading \\
+      // end lazy loading \\
+    }, 500)
   }
 
   async reloadImg() {
-    this.destroyFancy();
+    //this.destroyFancy();
     const fromServer: any = await this.api.getPortfolioImgs();
     this.appState.portfolioImg = fromServer;
+
     //$(".fancy").fancybox();
   }
 
   // << -- fancybox -- >> \\
   ngAfterViewInit() {
-    $(document).ready(function () { //Photos Gallery
-      $('[data-fancybox="gallery"]').fancybox({
-        // Options will go here
-      });
-    });
+
+    //$(document).ready(function () { //Photos Gallery
+    // $('[data-fancybox="gallery"]').fancybox({
+    // Options will go here
+    //});
+    //});
   }
   ngOnDestroy() {
     this.destroyFancy();

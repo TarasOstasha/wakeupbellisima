@@ -12,7 +12,7 @@ const appState: AppState = {
   hostName: (location.hostname == 'localhost') ? 'http://localhost/' : '/',
   //header
   header: {
-    isLogged: false,
+    //isLogged: false,
     user: {
       userName: '',
       _id: 'unlogged',

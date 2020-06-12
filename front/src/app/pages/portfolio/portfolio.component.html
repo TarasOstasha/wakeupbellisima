@@ -5,9 +5,11 @@
             <div class="col-md-4" *ngFor="let img of appState.portfolioImg; let i = index;">
                 <a  data-fancybox="gallery" rel="group" [href]=" url + 'imgs/' + img.url "
                     data-width="800" data-height="600">
-                    <li rel="group" [style.backgroundImage]="'url('+ url + 'imgs/' + img.url +')'">
+                    <!-- <li rel="group" [style.backgroundImage]="'url('+ url + 'imgs/' + img.url +')'"> -->
                         <!-- <img [src]=" url+ 'imgs/' + img.url "> -->
-                    </li>
+                    <!-- </li> -->
+                    <li class="slide-img" rel="group" [attr.data-img]="'url('+ url + 'imgs/' + img.url +')'"></li>
+
                 </a>
                 <button (click)="delete(img.url)" *ngIf="appState.header.user.role == 'admin' "
                     class="edit-admin delete">delete</button>
@@ -19,7 +21,7 @@
 
         </ul>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="appState.header.user.role == 'admin' ">
         <div class="choose-img col-md-4" *ngFor="let preview of appState.previews; let i = index;">
             <div class="input-pic upload-img">
                 <input id="upload" type="file" (change)="onChange($event)" class="form-control" multiple="multiple">
