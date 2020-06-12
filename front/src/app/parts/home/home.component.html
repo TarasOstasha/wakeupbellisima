@@ -20,14 +20,51 @@
             <h2>Reviews</h2>
             <div class="reviews-container">
                 <div id="google-reviews">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam debitis, repudiandae non sapiente
+                    <ul class="customer-reviews">
+                        <li *ngFor="let review of appState.reviewMsg">
+                            <div class="customer-name">
+                                {{ review.nameReview }}
+                            </div>
+                            <div class="reviews-star-window" [style.width.px]=" review.stars * 18.4 ">
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                {{ review.stars }} from 5
+                            </div>
+                            <div class="customer-msg">
+                                {{ review.messageReview }}
+                            </div>
+                            <div class="date">
+                                {{ review.created | date }}
+                            </div>
+
+                            <!-- {{ review._id }} -->
+                        </li>
+                    </ul>
+                    <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam debitis, repudiandae non sapiente
                     quasi eos commodi omnis, nemo eaque illum magni! Corrupti, totam aliquam dolorum in accusamus
-                    repudiandae illo et.
+                    repudiandae illo et. -->
                 </div>
 
             </div>
             <div class="write-reviews">
-                {{ reviewMsg.nameReview }}
+                <!-- <ul>
+                    <li *ngFor="let review of reviewMsg">
+                        <div class="customer-name">
+                           {{ review.nameReview }} 
+                        </div>
+                        <div class="customer-msg">
+                            {{ review.messageReview }}
+                        </div>
+                        <div class="date">
+                            {{ review.created | date }}
+                        </div>
+                 {{ review._id }} -->
+                <!-- </li> -->
+                <!-- </ul> -->
+                <!-- {{ reviewMsg | json }}                                                                                                                                                                                                                                                                                -->
                 <div class="custom-reviews">
                     <h2 (click)="openReview()">
                         Live a review &nbsp;
@@ -35,7 +72,8 @@
                         <i class="fa fa-minus" *ngIf="review"></i>
                     </h2>
                 </div>
-                <form (ngSubmit)="sendReview()" [formGroup]="reviewForm" id="reviewForm" name="reviewForm" *ngIf="review">
+                <form (ngSubmit)="sendReview()" [formGroup]="reviewForm" id="reviewForm" name="reviewForm"
+                    *ngIf="review">
                     <div class="row">
                         <!--Grid column-->
                         <div class="col-md-6">
@@ -58,7 +96,18 @@
                     <br>
                     <div class="row">
                         <div class="col-md-12">
-                            <app-star-rating></app-star-rating>
+                            <div class="star-review">
+                                <!-- Layer -->
+                                <div class="black-stars" style="width:75px;display:flex;">
+                                    <span *ngFor="let star of [1,2,3,4,5]" class="fa fa-star"
+                                        (click)="checkedStar(star);"></span>
+                                </div>
+                                <div class="yellow-stars">
+                                    <app-star-rating [starWidth]="starWidth" (ratingClicked)='onRatingClicked($event)'>
+                                    </app-star-rating>
+                                </div>
+                                <!-- <app-star-rating [rating]="starRating" (ratingClicked)="onRatingClicked($event)"></app-star-rating> -->
+                            </div>
                             Rate your master
                         </div>
                     </div>
@@ -66,8 +115,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="md-form">
-                                <textarea formControlName="messageReview" type="text" id="message"
-                                    name="message" rows="2" class="form-control md-textarea"></textarea>
+                                <textarea formControlName="messageReview" type="text" id="message" name="message"
+                                    rows="2" class="form-control md-textarea"></textarea>
                                 <label for="messageReview">Your message</label>
                                 <app-form-validator [it]="message"></app-form-validator>
                             </div>

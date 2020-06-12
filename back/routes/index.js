@@ -257,6 +257,7 @@ router.post('/review-msg', async(req, res) => {
       nameReview: req.body.nameReview,
       emailReview: req.body.emailReview,
       messageReview: req.body.messageReview,
+      stars: req.body.stars,
       dataReview: req.body.created
     });
     new_review_msg.save();
@@ -269,7 +270,7 @@ router.post('/review-msg', async(req, res) => {
 // get review-msgs
 router.get('/review-msgs', async(req, res) => {
   const msg = await ReviewMessage.find();
-  res.json({ ok: true, msg: msg })
+  res.json({ ok: true, data: msg })
 });
 
 //const details = require('../config/details.json');

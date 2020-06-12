@@ -6,23 +6,26 @@ import { Component, OnChanges, Input, EventEmitter, Output } from '@angular/core
   styleUrls: ['./star-rating.component.less']
 })
 export class StarRatingComponent implements OnChanges {
+  @Input() rating: number;
+  @Input() starWidth: number;
+  @Output() ratingClicked: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  @Input() rating: number;
-  starWidth: number;
-  @Output() ratingClicked: EventEmitter<string> =
-    new EventEmitter<string>();
+ 
 
   ngOnChanges(): void {
-    this.starWidth = this.rating * 75 / 5;
+    //this.starWidth = this.rating * 75 / 5;
   }
 
-  onClick(): void {
-    this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
+  checkedStar(icon): void {
+   // console.log(icon);
+    this.rating = icon;
+    this.ratingClicked.emit(this.rating);
+    this.starWidth = this.rating * 92 / 5;
+    console.log(this.starWidth,'px')
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 declare var swal: any;
@@ -10,9 +10,25 @@ import appState from '../../appState';
 })
 export class HomeComponent implements OnInit {
   review: boolean = false;
-  reviewMsg: any;
+  //reviewMsg: any;
+  starRating: any;
   reviewForm: FormGroup;
   appState = appState;
+
+  starWidth: number;
+  rating: number;
+
+  onRatingClicked(message: string): void {
+    this.starRating = message
+    console.log(this.starRating)
+  }
+
+  checkedStar(icon) {
+    this.starWidth = icon * 92 / 5;
+    console.log(icon)
+    console.log(this.starWidth, 'px')
+  }
+  
 
   mail: any = {
     nameReview: '',
@@ -32,6 +48,11 @@ export class HomeComponent implements OnInit {
       'messageReview': [this.mail.Review, [Validators.required, Validators.minLength(3)]],
     })
   }
+  ngOnInit() {
+    // setTimeout(() => {
+      this.getReview();
+    // }, 1000)
+  }
   //check email
   private mailValidator(): ValidatorFn {
     const error_message = { mailValidator: { msg: `Invalid email` } };
@@ -43,7 +64,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  // sned review
+  // send review
   async sendReview() {
     //console.log(this.reviewForm);
     const formData = { ...this.reviewForm.value }
@@ -53,13 +74,15 @@ export class HomeComponent implements OnInit {
         const reviewData = {
           nameReview: this.reviewForm.controls.nameReview.value,
           emailReview: this.reviewForm.controls.emailReview.value,
-          messageReview: this.reviewForm.controls.messageReview.value
+          messageReview: this.reviewForm.controls.messageReview.value,
           // add also rating
+          stars: this.starRating
         }
-        const fromServer = await this.api.reviewMsg(reviewData);
+        const fromServer = await this.api.reviewMessages(reviewData);
         console.log(fromServer)
-        this.reviewMsg = fromServer;
+        // this.reviewMsg = fromServer;
         this.reviewForm.reset();
+        this.getReview();
         swal.fire({
           icon: "success",
           title: "success",
@@ -79,11 +102,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-// get review
-async getReview() {
-  const fromServer: any = await this.api.getMsgsReview();
-  console.log(fromServer, 'reviewMsg from server')
-}
+  // get review
+  async getReview() {
+    const fromServer: any = await this.api.getMsgsReview();
+    this.appState.reviewMsg = fromServer.data;
+    console.log(this.appState.reviewMsg, 'reviewMsg from server')
+
+  }
 
   // getter to start working our validators (from form builder component)
   get name() { return this.reviewForm.get('nameReview') }
@@ -91,9 +116,7 @@ async getReview() {
   //get subject() { return this.contactsForm.get('subject') }
   get message() { return this.reviewForm.get('messageReview') }
 
-  ngOnInit() {
-    this.getReview()
-  }
+
 
   openReview() {
     this.review = !this.review;

@@ -59,7 +59,7 @@ export class ApiService {
   }
 
   // set review
-  reviewMsg(msg) {
+  reviewMessages(msg) {
     return this.http.post(url + 'review-msg', msg, httpOptions).toPromise();
   }
   // get review

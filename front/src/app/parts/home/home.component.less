@@ -9,7 +9,7 @@
     max-width: 600px;
     max-height: 450px;
     padding: 30px;
-
+    overflow: hidden;
   }
   #google-reviews {
     max-height: 450px;
@@ -80,4 +80,33 @@
       cursor: pointer;
     }
 
+  }
+
+  .customer-reviews {
+    li {
+      list-style: none;
+      padding: 25px 0;
+      .customer-name {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .star-review {
+    position: relative;
+    margin: 10px 0;
+    padding: 10px 0;
+    .black-stars {
+      position: absolute;
+      width:75px;
+      display:flex;
+    }
+    .yellow-stars {
+      position: absolute;
+    }
+  }
+  .reviews-star-window {
+    display: flex;
+    overflow: hidden;
+    color: forestgreen;
   }
