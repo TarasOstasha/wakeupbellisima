@@ -32,7 +32,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         entries.forEach((entry: any) => {
           const lazyImage = entry.target;
           //if (entry.isIntersecting) lazyImage.src = lazyImage.dataset.image;
-          console.log(lazyImage.dataset.img)
+          //console.log(lazyImage.dataset.img)
           if (entry.isIntersecting) lazyImage.style.backgroundImage = lazyImage.dataset.img;
         })
       });
@@ -203,9 +203,24 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         console.log('loaded', this.fileCounter);
         // alert('good job');
         if (this.fileQuantity >= this.fileCounter) { this.uploadNextFile(); }
+        else {  
+          // clear all uploaded files
+          console.log('ppState.previews')
+          this.appState.previews = [];
+          this.appState.previews.push({
+            reader: {
+              result: "assets/400x300.png"
+            }
+          });
+          setTimeout(() => {
+            this.reloadImg();
+            this.lazyInit();
+          },2000) 
+        }
         //alert('success')
         await this.api.addNewFileToJson(file.name);
         this.reloadImg();
+        //appState.previews.shift();
         swal.fire({
           title: "Good job!",
           text: "File successfully added",

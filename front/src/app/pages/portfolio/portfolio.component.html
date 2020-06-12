@@ -24,7 +24,7 @@
     <div class="row" *ngIf="appState.header.user.role == 'admin' ">
         <div class="choose-img col-md-4" *ngFor="let preview of appState.previews; let i = index;">
             <div class="input-pic upload-img">
-                <input id="upload" type="file" (change)="onChange($event)" class="form-control" multiple="multiple">
+                <input id="upload" type="file" (change)="onChange($event)" class="form-control">
                 <img [src]="preview.reader.result" alt="Image preview..." class="img-fluid mh-100 mw-100 img">
                 <!-- PROGRESS BAR -->
                 <div class="progress" *ngIf="progressBarPercent !== 0;">
