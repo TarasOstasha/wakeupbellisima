@@ -49,7 +49,8 @@ import { StarRatingComponent } from './parts/star-rating/star-rating.component';
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU'
+      //apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU'
+      apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
     })
   ],
   providers: [ApiService, StorageService],

@@ -136,7 +136,7 @@ markers: Marker[] = [
   {
     lat: 40.84004824998276,
     lng: -74.0906907105334,
-    label: 'wakeupbellisima',
+    label: 'Wake Up Bellisima',
     draggable: true
   },
   // you can create more markers
