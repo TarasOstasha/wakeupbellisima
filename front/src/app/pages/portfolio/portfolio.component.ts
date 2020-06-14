@@ -40,15 +40,26 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         imageObserver.observe(v);
       })
       // end lazy loading \\
-    }, 500)
+    }, 1300)
   }
 
+  //reloadImgFlag: boolean;
   async reloadImg() {
-    //this.destroyFancy();
-    const fromServer: any = await this.api.getPortfolioImgs();
-    this.appState.portfolioImg = fromServer;
+    try {
+      //this.destroyFancy();
+      // setTimeout(async () => {
+      //   this.reloadImgFlag = true;
+        const fromServer: any = await this.api.getPortfolioImgs();
+        console.log('sadsadsadasdsadas')
+        //this.reloadImgFlag = false;
+        this.appState.portfolioImg = fromServer;
+      //}, 500)
+      //$(".fancy").fancybox();
+    } catch (error) {
+      //console.log('reloadimg')
+      //this.reloadImg();
+    }
 
-    //$(".fancy").fancybox();
   }
 
   // << -- fancybox -- >> \\
@@ -73,17 +84,22 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   async delete(name) {
     const fromServer = this.api.removeImg(name);
     console.log(fromServer);
+    // this.reloadImg();
+    // this.lazyInit();
+    // console.log(appState.portfolioImg)
   }
 
   async moveRight(index) {
     const fromServer: any = await this.api.move(index, 'right');
     console.log(fromServer);
     this.reloadImg();
+    this.lazyInit();
   }
   async moveLeft(index) {
     const fromServer: any = await this.api.move(index, 'left');
     console.log(fromServer);
     this.reloadImg();
+    this.lazyInit();
   }
 
 
@@ -203,7 +219,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         console.log('loaded', this.fileCounter);
         // alert('good job');
         if (this.fileQuantity >= this.fileCounter) { this.uploadNextFile(); }
-        else {  
+        else {
           // clear all uploaded files
           console.log('ppState.previews')
           this.appState.previews = [];
@@ -215,7 +231,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
           setTimeout(() => {
             this.reloadImg();
             this.lazyInit();
-          },2000) 
+          }, 2000)
         }
         //alert('success')
         await this.api.addNewFileToJson(file.name);

@@ -1,5 +1,49 @@
 <app-header></app-header>>
 <div class="wrapper">
-
+    <h1>About Me</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <p class="personal-info">
+                    Nataliya is a perfectionist by nature. She is persistent and hard working.
+                    She offers each client a high level of professional skill perfected by
+                    her artistic and visual instinct. She pays particular attention to each
+                    client’s unique features and specific needs based on her experience as
+                    well as her natural aesthetic ability.
+                    Nataliya follows strict standards of safety in her work and the usage of specialized equipment,
+                    the disposal of probes, and the handling of pigmentation. She implements
+                    the same medical sterilization standards and procedures as physicians.
+                    <br>
+                    Languages spoken: <strong>english, polish, ukrainian, russian</strong>.
+                    <br><br>
+                    Her education includes:
+                    <br>
+                    PERMANENT COSMETIC CERTIFICATE
+                    <br>
+                    DAAM PIGMINTATION DIPLOMA
+                    <br>
+                    PHI REMOVAV CERTIFICATE
+                </p>
+            </div>
+            <div class="col-md-5">
+                <div class="photo-personal">
+                    <img src="../../../assets/imgs/Natalya.jpg" alt="Natalya">
+                    <img class="logoTeach" src="../../../assets/imgs/AAM-Logo-HP.png">
+                </div>
+                <h3>Nataliya Hocko</h3>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row_certificate">
+                <ul class="slider_sertificate">
+                    <i class="fa fa-arrow-circle-left left"></i>
+                    <li *ngFor="let certificate of certificates">
+                        <img [src]="certificate.url" alt="certificate">
+                    </li>
+                    <i class="fa fa-arrow-circle-right right"></i>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 <app-footer></app-footer>

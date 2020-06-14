@@ -1,3 +1,60 @@
+@import url('../../../assets/fonts/font.less');
 .wrapper {
     min-height: 100%;
+    padding: 75px 0;
+    h1 {
+        text-align: center;
+        .h1(@h1);
+        margin-bottom: 24px;
+    }
+    h3 {
+        text-align: center;
+        .h1(@h1);
+    }
 }
+.container-abouteUs {
+    margin: 25px 0;
+  }
+  .photo-personal {
+    text-align: center;
+  }
+  .personal-info {
+    //font-family: @mainFont;
+    //font-size: 17px;
+    .infoText(@info)
+
+  }
+  .logoTeach {
+    position: absolute;
+    right: 20%;
+    top: -7%;
+  }
+  
+  .slider_sertificate {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+      li {
+          list-style-type: none;
+          padding: 0 55px;
+      }
+  }
+  
+  
+  .row_certificate {
+      margin-top: 80px;
+  }
+  .left {
+    font-size: 25px;
+    position: absolute;
+    cursor: pointer;
+  }
+  .right {
+    font-size: 25px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
