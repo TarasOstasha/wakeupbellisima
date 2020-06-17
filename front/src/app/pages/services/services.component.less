@@ -1,3 +1,55 @@
+@import url('../../../assets/fonts/font.less');
+
 .wrapper {
     min-height: 100%;
+    padding: 75px 0;
+    h1 {
+        text-align: center;
+        .h1(@h1);
+        margin-bottom: 24px;
+    }
 }
+.infoServices_box {
+   // background-image: url('../images/main/bgService.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .service-row {
+    margin: 0;
+    padding: 30px 0;
+    background-color:rgba(255,255,255,0.9);
+    //background-color: rgba(249,101,134, 0.5);
+  }
+  .service_info {
+    .infoText(@info);
+    //color: @mainColorBlack;
+    //font-family: @mainFont;
+    font-size: 17px;
+    padding: 10px 0;
+    h3 {
+      padding: 10px 0;
+    }
+  }
+  .imgService {
+    img {
+      width: 100%;
+      -webkit-box-shadow: 10px 10px 9px 0px rgba(0,0,0,0.75);
+      -moz-box-shadow: 10px 10px 9px 0px rgba(0,0,0,0.75);
+      box-shadow: 10px 10px 9px 0px rgba(0,0,0,0.75);
+      -moz-transition: all 1s ease-out;
+      -o-transition: all 1s ease-out;
+      -webkit-transition: all 1s ease-out;
+    }
+    img:hover{
+      -webkit-transform: scale(1.1);
+      -moz-transform: scale(1.1);
+      -o-transform: scale(1.1);
+    }
+  }
+  .service-wrapper {
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+  }

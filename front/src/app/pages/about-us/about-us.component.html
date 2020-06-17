@@ -37,7 +37,10 @@
             <div class="row_certificate">
                 <ul class="slider_sertificate">
                     <i (click)="move($event)" class="fa fa-arrow-circle-left left"></i>
-                    <li [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" class="slides" *ngFor="let certificate of certificates;let i = index;">
+                    <li 
+                        [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" 
+                        class="slides col-md-4" 
+                        *ngFor="let certificate of certificates;let i = index;">
                         <img [src]="certificate.url" alt="certificate">
                     </li> 
                     <i (click)="move($event)" class="fa fa-arrow-circle-right right"></i>
