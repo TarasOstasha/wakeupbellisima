@@ -2528,7 +2528,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var url = 'http://localhost/';
+//var url = 'http://localhost/';
+if (location.hostname == 'localhost')
+    var url = 'http://localhost:81/'; //dev
+else
+    var url = '/'; //production
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
