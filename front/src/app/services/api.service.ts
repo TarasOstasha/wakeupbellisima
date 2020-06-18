@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import  appState  from '../appState';
 
-var url = 'http://localhost/';
+if(location.hostname == 'localhost') var url = 'http://localhost'; //dev
+else var url = ''; //production
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
