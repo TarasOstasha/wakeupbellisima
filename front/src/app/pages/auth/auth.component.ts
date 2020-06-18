@@ -6,6 +6,8 @@ import appState from '../../appState';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 
+declare var swal: any;
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -71,7 +73,23 @@ export class AuthComponent implements OnInit {
       //console.log(userData, 'user data')
 
       const fromServer: any = await this.api.register(userData);
-      if (fromServer.ok) this.router.navigateByUrl('/redirector');
+      //if (fromServer.ok) this.router.navigateByUrl('/redirector'); //old
+      if (this.authForm.controls.email.status == "INVALID") {
+        swal.fire({
+          title: "Error",
+          text: "Please, fill out this form!",
+          icon: "error",
+        })
+        return
+      }
+      if (fromServer.ok) {
+        swal.fire({
+          title: "Success",
+          text: "Your account has been created!\nPlease, log in into your account",
+          icon: "success",
+        })
+        this.router.navigateByUrl('/redirector');
+      }
 
     } catch (error) {
       console.log(error)
@@ -86,6 +104,14 @@ export class AuthComponent implements OnInit {
         password: this.authForm.controls.password.value
       }
       const fromServer: any = await this.api.login(userData);
+      if (this.authForm.controls.email.status == "INVALID") {
+        swal.fire({
+          title: "Error",
+          text: "Please, enter valid value",
+          icon: "error",
+        })
+        return
+      }
       if (fromServer.ok) this.router.navigateByUrl('/redirector');
       this.appState.header.user = fromServer.user;
       this.storage.setItem('user', this.appState.header.user)
