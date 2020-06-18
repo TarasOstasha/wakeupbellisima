@@ -12,9 +12,9 @@ const ReviewMessage = require('../models/review');
 //let portfolioImgsList;
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function (req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 router.get('/portfolio-imgs', async (req, res) => {
   //const portfolioImgsList = await fs.readdir('downloads/imgs');
