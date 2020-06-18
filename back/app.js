@@ -32,6 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../front/dist/front')));
 app.use(express.static(path.join(__dirname, 'downloads')));
 
 require('./config/passport.js'); // connect passport
@@ -54,6 +55,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+//redirect all get request to index.html. Must be the last!!!!!!!!!!!!!!!
+router.get('/*', async (req, res, next) => {
+  const html = await fs.readFile('../front/dist/front/index.html');
+  res.end(html);
+  // res.redirect('/index.html');
 });
 
 module.exports = app;
