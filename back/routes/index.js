@@ -312,4 +312,11 @@ async function sendMail(recipient, callback) {
   // })
 }
 
+//redirect all get request to index.html. Must be the last!!!!!!!!!!!!!!!
+router.get('/*', async (req, res, next) => {
+  const html = await fs.readFile('../front/dist/front/index.html');
+  res.end(html);
+  // res.redirect('/index.html');
+});
+
 module.exports = router;
