@@ -5,24 +5,26 @@
         <div class="row">
             <div class="col-md-7">
                 <p class="personal-info">
-                    Nataliya is a perfectionist by nature. She is persistent and hard working.
-                    She offers each client a high level of professional skill perfected by
-                    her artistic and visual instinct. She pays particular attention to each
-                    client’s unique features and specific needs based on her experience as
-                    well as her natural aesthetic ability.
-                    Nataliya follows strict standards of safety in her work and the usage of specialized equipment,
-                    the disposal of probes, and the handling of pigmentation. She implements
-                    the same medical sterilization standards and procedures as physicians.
+                    Nataliya is a perfectionist by nature. She is persistent and hard working. She offers each client a
+                    high level of professional skill perfected by her artistic and visual instinct. She pays particular
+                    attention to each client’s unique features and specific needs based on her experience as well as her
+                    natural aesthetic ability. Nataliya follows strict standards of safety in her work and the usage of
+                    specialized equipment, the disposal of probes, and the handling of pigmentation. She implements the
+                    same medical sterilization standards and procedures as physicians.
                     <br>
                     Languages spoken: <strong>english, polish, ukrainian, russian</strong>.
                     <br><br>
                     Her education includes:
                     <br>
-                    PERMANENT COSMETIC CERTIFICATE
+                    * NJ Board Certified Permanent Makeup Artist
                     <br>
-                    DAAM PIGMINTATION DIPLOMA
+                    * Graduated member of  American Academy of Micropigmentation
                     <br>
-                    PHI REMOVAV CERTIFICATE
+                    * Osha Certified
+                    <br>
+                    * Daam Pigmintation Diploma
+                    <br>
+                    * Phi Removal Certificate
                 </p>
             </div>
             <div class="col-md-5">
@@ -37,12 +39,10 @@
             <div class="row_certificate">
                 <ul class="slider_sertificate">
                     <i (click)="move($event)" class="fa fa-arrow-circle-left left"></i>
-                    <li 
-                        [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" 
-                        class="slides col-md-4" 
+                    <li [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" class="slides col-md-4"
                         *ngFor="let certificate of certificates;let i = index;">
                         <img [src]="certificate.url" alt="certificate">
-                    </li> 
+                    </li>
                     <i (click)="move($event)" class="fa fa-arrow-circle-right right"></i>
                 </ul>
             </div>
