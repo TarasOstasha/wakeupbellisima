@@ -6,14 +6,80 @@
         <div class="main-info">
             <h1>WHAT IS PERMANENT MAKEUP?</h1>
             <p class="text">
-                Permanent makeup, also known as Intradermal Pigmentation,
+                &nbsp;&nbsp;Permanent makeup, also known as Intradermal Pigmentation,
                 is a revolutionary method of applying natural pigments into the dermal layer of skin.
                 This state-of-the-art technique is medically proven and specifically designed to be completely safe.
                 Permanent makeup is used for a variety of cosmetic enhancements such as permanent eyebrows,
                 eye liner, and lip liner/color. Other permanent makeup procedures include vitiligo,
                 scar camouflage, areola restoration, hairline enhancement, and more.
                 Permanent makeup has also been used to cover-up stretchmarks, birthmarks,
-                freckles/age spots, and uneven skin discolorations.
+                freckles/age spots, and uneven skin discolorations 
+                <span class="readMore" (click)="switchTextFlag()">
+                    <span *ngIf="!paragraphFlag">... Read More</span>
+                    <span *ngIf="paragraphFlag">... Read Less</span>
+                </span> <br>
+                <span *ngIf="paragraphFlag">
+                    &nbsp;&nbsp;Permanent makeup is chosen for its natural elegance and effortless beauty by women all
+                    over the world.
+                    This micropigmentation techniques assures a time saving solution for many people. They supply an
+                    ease of
+                    application for those who do not like to apply makeup and relief to allergy sufferers, contact
+                    wearers,
+                    women who exercise, or anyone suffering from Alopecia or any type of hair loss. Permanent makeup has
+                    many other benefits. It is often used in conjunction with reconstructive surgery to visually enhance
+                    the
+                    results. Through the use of permanent cosmetics, post mastectomy breasts can be made to look
+                    completely
+                    natural again with areola recreation. Unsightly scars can be removed or hidden. Special techniques
+                    can
+                    be used to simulate hair extending in receding hair lines and masking bald spots.
+                    <br>
+                    &nbsp;&nbsp;It depends on you, if Semi permanent makeup sounds better than permanent, but it is the
+                    same procedure.
+                    It is important when you look for a permanent makeup artist, that you trust their artistic ability,
+                    as
+                    well as physical. According to Dendy Engelman, a dermatologist at Manhattan Dermatology & Cosmetic
+                    Surgery in New York City, a permanent makeup artist needs to have "the hands of a surgeon and the
+                    eyes
+                    of an artist," I have the artistic nature, as well as the steady hand with this delicate procedure–
+                    but
+                    as any professional, I aim to keep my skills sharp by practicing everyday. Whether on practice
+                    flesh, or
+                    on fruits and vegetables, and myself, I have tattooed over a million eye brows. When I was young, I
+                    loved drawing designs on my nails.
+                    <br>
+                    &nbsp;&nbsp;My goal with every client is to figure out the best design and placement, and with
+                    client approval, I
+                    make the experience pleasant and safe - leading to amazing results.
+
+                    I believe It is also extremely important to have open communication about expectations, preferences
+                    and
+                    the natural shape of your face. Open communication must exist throughout the whole process,
+                    (including
+                    when you are happy and satisfied and forget to send me a photo.)
+                    <br>
+                    &nbsp;&nbsp;The decision to have permanent makeup may be a difficult one when thinking about the
+                    risks, the pain
+                    associated as well as the cost. Also, equally as important is the always changing beauty trends.
+                    Today
+                    full and rich eyebrows are the trend, but 20 years ago thin eyebrows were in. In many cases, we
+                    plucked
+                    and waxed our brows so much, that today we need have to draw them in.
+
+                    This is why I focus on your hair color and natural shape of your face, taking aging effects and any
+                    imperfections into consideration when creating the drawn example.
+
+                    Often, trends come and go, but a natural look is forever. In many cases, if you need to be dolled up
+                    for
+                    a special event, or need a change, regular make up can be applied. It is also important to know that
+                    your satisfaction is important, and the job is not complete until you feel beautiful and happy.
+                    <br>
+                    &nbsp;&nbsp;I am confident in my ability to make you feel naturally beautiful without any daily
+                    enhancements. You
+                    will wake up beautiful, and you will shine all day.
+                </span>
+
+
             </p>
         </div>
         <div class="google-review-wrapper">
@@ -31,10 +97,10 @@
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
-                                {{ review.stars }} <i>from 5</i> 
+                                {{ review.stars }} <i>from 5</i>
                             </div>
                             <div class="customer-msg">
-                                {{ review.messageReview }} 
+                                {{ review.messageReview }}
                             </div>
                             <div class="date">
                                 {{ review.created | date }}

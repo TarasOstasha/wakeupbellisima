@@ -11,6 +11,14 @@ import { StorageService } from '../../services/storage.service';
 })
 export class HeaderComponent implements OnInit {
   appState = appState;
+  subMenuFlag: boolean = false;
+
+
+  servicesSub = [
+    { name: 'Eyes', route: '/eyes' },
+    { name: 'Lips', route: '/lips' },
+    { name: 'Corrective', route: '/corrective' }
+  ]
 
   constructor(
     private router: Router,
@@ -45,6 +53,16 @@ export class HeaderComponent implements OnInit {
       this.storage.clearItem('user');
       location.reload();
     }
+  }
+
+  showServicesSubMenu() {
+    //console.log('show toogle');
+    this.subMenuFlag = true;
+  }
+
+  hideServicesSubMenu() {
+   // console.log('hide toogle');
+    this.subMenuFlag = false;
   }
 
 }

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import  appState  from '../appState';
 
-//var url = 'http://localhost/';
+var url = 'http://localhost/';
 
-if(location.hostname == 'localhost') var url = 'http://localhost:81/'; //dev
-else var url = '/'; //production
+//if(location.hostname == 'localhost') var url = 'http://localhost:81/'; //dev
+//else var url = '/'; //production
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

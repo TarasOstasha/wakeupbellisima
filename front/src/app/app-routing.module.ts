@@ -9,12 +9,18 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { RedirectorComponent } from './pages/redirector/redirector.component';
+import { EyesComponent } from './pages/eyes/eyes.component';
+import { LipsComponent } from './pages/lips/lips.component';
+import { CorrectiveComponent } from './pages/corrective/corrective.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'portfolio', component: PortfolioComponent },
+  { path: 'eyes', component: EyesComponent },
+  { path: 'lips', component: LipsComponent },
+  { path: 'corrective', component: CorrectiveComponent },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'book-appointment', component: BookAppointmentComponent },
   { path: 'auth', component: AuthComponent },

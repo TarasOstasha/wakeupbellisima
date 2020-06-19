@@ -10,6 +10,7 @@ import appState from '../../appState';
 })
 export class HomeComponent implements OnInit {
   review: boolean = false;
+  paragraphFlag: boolean = false;
   //reviewMsg: any;
   starRating: any;
   reviewForm: FormGroup;
@@ -120,6 +121,10 @@ export class HomeComponent implements OnInit {
 
   openReview() {
     this.review = !this.review;
+  }
+
+  switchTextFlag() {
+    this.paragraphFlag = !this.paragraphFlag;
   }
 
 }

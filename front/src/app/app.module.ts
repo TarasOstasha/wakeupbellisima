@@ -24,6 +24,9 @@ import { FormValidatorComponent } from './parts/form-validator/form-validator.co
 import { RedirectorComponent } from './pages/redirector/redirector.component';
 import { CarouselComponent } from './parts/carousel/carousel.component';
 import { StarRatingComponent } from './parts/star-rating/star-rating.component';
+import { EyesComponent } from './pages/eyes/eyes.component';
+import { LipsComponent } from './pages/lips/lips.component';
+import { CorrectiveComponent } from './pages/corrective/corrective.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { StarRatingComponent } from './parts/star-rating/star-rating.component';
     FormValidatorComponent,
     RedirectorComponent,
     CarouselComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    EyesComponent,
+    LipsComponent,
+    CorrectiveComponent
   ],
   imports: [
     BrowserModule,
