@@ -49,10 +49,10 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       //this.destroyFancy();
       // setTimeout(async () => {
       //   this.reloadImgFlag = true;
-        const fromServer: any = await this.api.getPortfolioImgs();
-        console.log('sadsadsadasdsadas')
-        //this.reloadImgFlag = false;
-        this.appState.portfolioImg = fromServer;
+      const fromServer: any = await this.api.getPortfolioImgs();
+      //console.log('sadsadsadasdsadas')
+      //this.reloadImgFlag = false;
+      this.appState.portfolioImg = fromServer;
       //}, 500)
       //$(".fancy").fancybox();
     } catch (error) {
@@ -65,20 +65,18 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   // << -- fancybox -- >> \\
   ngAfterViewInit() {
 
-    //$(document).ready(function () { //Photos Gallery
-    // $('[data-fancybox="gallery"]').fancybox({
-    // Options will go here
-    //});
-    //});
+    $(document).ready(function () { //Photos Gallery
+      $('[data-fancybox="gallery"]').fancybox({
+        //Options will go here
+        loop: true
+      });
+    });
   }
   ngOnDestroy() {
-    this.destroyFancy();
     //$(".fancybox").unbind('click.fb');
     // or maybe jQuery(".fancybox").off() to remove all bindings
   }
-  destroyFancy() {
-    // $(".fancybox").unbind('click.fb');
-  }
+
   // << -- end fancybox -- >> \\
 
   async delete(name) {

@@ -22,6 +22,7 @@
  */
 
 'use strict';
+// EAAqmfRHOVYABAJwpX2S9VTLZCFNi6o8Sd1fgQUIQTKv7P1WSU7VZCp5OpouGtaRH8AsUCeLNuxCQyJvLVSQdvP34OZChacK6VZCQlLXVZAAuejqph3HZAyr3mNvM69G0ZB8PSxbaz1zfCdhIB0QFQN77MbwDGns81mEmbo4PXI35NjiOGPKWZBqSZBdH4QO8yEnkZD
 const PAGE_ACCESS_TOKEN = 'EAAqmfRHOVYABAHMKooGyPPTD2zYqwoDLTJwg3CZBncQ8ZB07PXC53xX5nOIeri2hZA6FvnSFZAX3O95ZA3pelnEWxcbgW8PbVcufVEUnolCHb2toFgJK7OXZAwA3sCCbTdd3DmmmixHujEbr21DivFOvBYfvE6WcgyMOveWvXMKM6Fag6VXc9tVJDzAHrGJrbnVdPhKjqHAHOhL5qNVr4hZC1gCKh5IynEvJm5A7uEedAZDZD' // process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const 
@@ -50,7 +51,8 @@ app.post('/webhook', (req, res) => {
 
 
       // Get the sender PSID
-      let sender_psid = webhook_event.sender.id; 
+      var yourID = "100052755006385"
+      let sender_psid = yourID; //
       console.log('Sender ID: ' + sender_psid);
 
       //Check if the event is a message or postback and
@@ -214,10 +216,15 @@ function callSendAPI(sender_psid, response) {
   }); 
 }
 
+
 // 1
 //From a separate command line prompt, test your webhook verification by substituting your verify token into this cURL request:
 // curl -X GET "tonyjoss.com:5000/webhook?hub.verify_token=dsbfjhdsbfjhdsbfjhbjhb3hbfjdhsbvjds&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
 
 //2
 //Test your webhook by sending this cURL request:
-// curl -H "Content-Type: application/json" -X POST "tonyjoss.com:5000/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
+// curl -H "Content-Type: application/json" -X POST "tonyjoss.com:5000/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE","sender": {"id": "100001433681997"}}]}]}'
+
+
+
+// curl -X GET "https://93e0dea42d69.ngrok.io/webhook?hub.verify_token=dsbfjhdsbfjhdsbfjhbjhb3hbfjdhsbvjds&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"

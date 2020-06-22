@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 declare var swal: any;
 import appState from '../../appState';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -40,7 +41,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private api: ApiService
+    private api: ApiService,
+
   ) {
     this.reviewForm = this.formBuilder.group({
       'nameReview': [this.mail.nameReview, [Validators.required, Validators.minLength(2)]],
@@ -53,7 +55,9 @@ export class HomeComponent implements OnInit {
     // setTimeout(() => {
       this.getReview();
     // }, 1000)
+
   }
+
   //check email
   private mailValidator(): ValidatorFn {
     const error_message = { mailValidator: { msg: `Invalid email` } };

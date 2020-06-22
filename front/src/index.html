@@ -11,6 +11,8 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- FANCYBOX -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <!-- <link rel="stylesheet" href="./assets/js/jquery.fancybox.min.css"> -->
+
   <!-- sweet alerts -->
   <!-- <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
@@ -41,11 +43,42 @@
   <!-- <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script> -->
   <script src="./assets/js/fancy-box.js"></script>
+  <!-- <script src="./assets/js/jquery.fancybox.min.js"></script> -->
+
   <!-- sweet alerts -->
   <!-- <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  
-  
+
+  <!-- <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '2997805866964352',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v7.0'
+      });
+      // FB.login(function (response) {
+      //   if (response.authResponse) {
+      //     console.log('Welcome!  Fetching your information.... ');
+      //     FB.api('/me', function (response) {
+      //       console.log('Good to see you, ' + response.name + '.');
+      //     });
+      //   } else {
+      //     console.log('User cancelled login or did not fully authorize.');
+      //   }
+      // });
+      FB.ui({
+        method: 'share',
+        href: 'https://developers.facebook.com/docs/'
+      }, function (response) { });
+    };
+  </script>
+  <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <div class="fb-send-to-messenger" messenger_app_id="2997805866964352" page_id="https://www.facebook.com/taras.ostasha/" data-ref="<PASS_THROUGH_PARAM>"
+    color="<blue | white>" size="<standard | large | xlarge>">
+  </div> -->
+  <!-- <script type="text/javascript" src=”https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"></script> -->
+  <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </body>
 
 </html>

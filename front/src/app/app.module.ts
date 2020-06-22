@@ -15,7 +15,9 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { BookAppointmentComponent } from './pages/book-appointment/book-appointment.component';
 import { AuthComponent } from './pages/auth/auth.component';
-import { AgmCoreModule } from '@agm/core'
+import { AgmCoreModule } from '@agm/core';
+//import { FacebookModule } from ‘ngx-facebook’;
+import { FacebookModule } from 'ngx-facebook';
 
 // services
 import { ApiService } from './services/api.service';
@@ -57,7 +59,8 @@ import { CorrectiveComponent } from './pages/corrective/corrective.component';
     AgmCoreModule.forRoot({
       //apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU'
       apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
-    })
+    }),
+    FacebookModule.forRoot()
   ],
   providers: [ApiService, StorageService],
   bootstrap: [AppComponent]
