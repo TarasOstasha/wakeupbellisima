@@ -49,36 +49,30 @@
   <!-- <script src="./node_modules/sweetalert2/dist/sweetalert2.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-  <!-- <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        appId: '2997805866964352',
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v7.0'
-      });
-      // FB.login(function (response) {
-      //   if (response.authResponse) {
-      //     console.log('Welcome!  Fetching your information.... ');
-      //     FB.api('/me', function (response) {
-      //       console.log('Good to see you, ' + response.name + '.');
-      //     });
-      //   } else {
-      //     console.log('User cancelled login or did not fully authorize.');
-      //   }
-      // });
-      FB.ui({
-        method: 'share',
-        href: 'https://developers.facebook.com/docs/'
-      }, function (response) { });
-    };
-  </script>
-  <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-  <div class="fb-send-to-messenger" messenger_app_id="2997805866964352" page_id="https://www.facebook.com/taras.ostasha/" data-ref="<PASS_THROUGH_PARAM>"
-    color="<blue | white>" size="<standard | large | xlarge>">
-  </div> -->
-  <!-- <script type="text/javascript" src=”https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"></script> -->
-  <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v7.0'
+    });
+  };
+
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="103056834795995">
+</div>
+  <!-- <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script> -->
 </body>
 
 </html>
