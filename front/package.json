@@ -23,6 +23,7 @@
     "@angular/router": "~10.0.0-rc.3",
     "@sweetalert2/ngx-sweetalert2": "^7.2.0",
     "fancybox": "^3.0.1",
+    "jwt-decode": "^2.2.0",
     "ngx-facebook": "^3.0.0-0",
     "rxjs": "~6.5.5",
     "sweetalert2": "^9.14.0",

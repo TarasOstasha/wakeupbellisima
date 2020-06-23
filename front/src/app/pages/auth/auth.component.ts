@@ -6,6 +6,8 @@ import appState from '../../appState';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 
+import * as jwt_decode from 'jwt-decode';
+
 declare var swal: any;
 
 @Component({
@@ -74,14 +76,6 @@ export class AuthComponent implements OnInit {
 
       const fromServer: any = await this.api.register(userData);
       //if (fromServer.ok) this.router.navigateByUrl('/redirector'); //old
-      if (this.authForm.controls.email.status == "INVALID") {
-        swal.fire({
-          title: "Error",
-          text: "Please, fill out this form!",
-          icon: "error",
-        })
-        return
-      }
       if (fromServer.ok) {
         swal.fire({
           title: "Success",
@@ -92,30 +86,36 @@ export class AuthComponent implements OnInit {
       }
 
     } catch (error) {
+      swal.fire({
+        title: "Error",
+        text: "Please, fill out this form!",
+        icon: "error",
+      })
       console.log(error)
     }
   }
 
   async singIn() {
     try {
-      console.log(this.authForm)
+      //console.log(this.authForm)
       const userData = {
         email: this.authForm.controls.email.value,
         password: this.authForm.controls.password.value
       }
       const fromServer: any = await this.api.login(userData);
-      if (this.authForm.controls.email.status == "INVALID") {
-        swal.fire({
-          title: "Error",
-          text: "Please, enter valid value",
-          icon: "error",
-        })
-        return
-      }
+      console.log(fromServer);
+      const token = fromServer.token;
+      var decoded = jwt_decode(token);
       if (fromServer.ok) this.router.navigateByUrl('/redirector');
-      this.appState.header.user = fromServer.user;
+      //this.appState.header.user = fromServer.user;
+      this.appState.header.user = decoded;
       this.storage.setItem('user', this.appState.header.user)
     } catch (error) {
+      swal.fire({
+        title: "Error",
+        text: "Please, enter valid value",
+        icon: "error",
+      })
       console.log(error)
     }
   }

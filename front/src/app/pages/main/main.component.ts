@@ -11,21 +11,21 @@ export class MainComponent implements OnInit {
 
   constructor(    
     //private facebookService: FacebookService
-    private fb: FacebookService
+    //private fb: FacebookService
     ) { 
-      const initParams: InitParams = {
-        appId: '1234566778',
-        xfbml: true,
-        version: 'v2.8'
-      };
+    //   const initParams: InitParams = {
+    //     appId: '1234566778',
+    //     xfbml: true,
+    //     version: 'v2.8'
+    //   };
    
-      fb.init(initParams);
-    }
-    loginWithFacebook(): void {
+    //   fb.init(initParams);
+    // }
+    // loginWithFacebook(): void {
  
-      this.fb.login()
-        .then((response: LoginResponse) => console.log(response))
-        .catch((error: any) => console.error(error));
+    //   this.fb.login()
+    //     .then((response: LoginResponse) => console.log(response))
+    //     .catch((error: any) => console.error(error));
     }
 
   ngOnInit() {

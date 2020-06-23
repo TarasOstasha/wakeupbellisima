@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const fsFile = require('fs').promises;
 const fs = require('fs');
+const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 
@@ -188,24 +190,51 @@ router.post('/upload2', async (req, res) => {
 
 
 // register
+// router.post('/register', async (req, res) => {
+//   try {
+//     const userEmail = req.body.email;
+//     const user = await User.findOne({ email: userEmail }); // request to data base
+//     if (user) return res.json({ ok: false, message: 'this user already exist' });
+
+//     // create new user
+//     const new_user = new User({
+//       userName: req.body.name,
+//       email: req.body.email,
+//       password: req.body.password,
+//       role: 'user'
+//     });
+//     new_user.save();
+//     res.json({ ok: true, message: 'new account has been created' });
+
+//     req.login(req.body, () => {
+//       res.json({ ok: true })
+//     })
+//   } catch (error) {
+//     console.log(error)
+//     res.sendStatus(500);
+//   }
+
+// })
+// register with encode
 router.post('/register', async (req, res) => {
   try {
     const userEmail = req.body.email;
     const user = await User.findOne({ email: userEmail }); // request to data base
-    if (user) return res.json({ ok: false, message: 'this user already exist' });
+    if (user) return res.status(409).json({ ok: false, message: 'this user already exist' });
 
     // create new user
-    const new_user = new User({
-      userName: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      role: 'user'
-    });
-    new_user.save();
-    res.json({ ok: true, message: 'new account has been created' });
-
-    req.login(req.body, () => {
-      res.json({ ok: true })
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+      if (err) return res.status(500).json({ ok: false, error: err })
+      else {
+        const new_user = new User({
+          userName: req.body.name,
+          email: req.body.email,
+          password: hash, //req.body.password,
+          role: 'user'
+        });
+        new_user.save();
+        res.json({ ok: true, message: 'new account has been created' });
+      }
     })
   } catch (error) {
     console.log(error)
@@ -214,18 +243,54 @@ router.post('/register', async (req, res) => {
 
 })
 
-// login
+// login OLD
+// router.post('/login', async (req, res) => {
+//   const userEmail = req.body.email;
+//   const user = await User.findOne({ email: userEmail });
+//   console.log(user);
+//   if (!user) return res.json({ ok: false, message: 'this user not exist' });
+//   req.login(req.body, () => {
+//     res.json({ ok: true, user })
+//   })
+// });
+
+
+
+// login NEW
 router.post('/login', async (req, res) => {
-  const userEmail = req.body.email;
-  const user = await User.findOne({ email: userEmail });
-  console.log(user);
-  if (!user) return res.json({ ok: false, message: 'this user not exist' });
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    console.log(user)
+    if (!user) return res.json({ ok: false, message: 'this user not exist' });
+    bcrypt.compare(req.body.password, user.password, (err, result) => {
+      if (err) return res.status(401).json({ message: 'Auth failed' });
+      if (result) {
+        const token = jwt.sign({
+          email: user.email,
+          userId: user._id,
+          userName: user.userName,
+          role: user.role,
+          isLogged: user.isLogged
+        }, process.env.JWT_KEY,
+          {
+              expiresIn: "1h"
+          },
 
-  req.login(req.body, () => {
-    res.json({ ok: true, user })
-  })
+        )
+ 
+        return res.status(200).json({ ok: true, message: 'Auth successful', token: token });
+      }
+      res.status(401).json({ message: 'Auth failed' });
+    })
 
-});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error })
+  }
+
+})
+
+
 // log out
 router.get('/log-out', async (req, res) => {
   req.logout();
@@ -248,10 +313,10 @@ router.post('/contacts-mail', async (req, res) => {
 })
 
 // create review-msg
-router.post('/review-msg', async(req, res) => {
+router.post('/review-msg', async (req, res) => {
   try {
     console.log(req.body, 'review mail')
-  //const msg = await ReviewMessage.find({});
+    //const msg = await ReviewMessage.find({});
 
     const new_review_msg = new ReviewMessage({
       nameReview: req.body.nameReview,
@@ -261,14 +326,14 @@ router.post('/review-msg', async(req, res) => {
       dataReview: req.body.created
     });
     new_review_msg.save();
-    res.json({ ok: true, data:  new_review_msg })
+    res.json({ ok: true, data: new_review_msg })
   } catch (error) {
     console.log(error, 'something went wrong');
     res.json('something went wrong on server');
   }
 })
 // get review-msgs
-router.get('/review-msgs', async(req, res) => {
+router.get('/review-msgs', async (req, res) => {
   const msg = await ReviewMessage.find();
   res.json({ ok: true, data: msg })
 });
