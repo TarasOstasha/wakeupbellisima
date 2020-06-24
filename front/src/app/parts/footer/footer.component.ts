@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import appState from '../../appState';
 
 @Component({
   selector: 'app-footer',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.less']
 })
 export class FooterComponent implements OnInit {
-
+  appState = appState;
   constructor() { }
 
   ngOnInit() {

@@ -5,27 +5,34 @@
         <div class="row service-row">
             <div class="container">
                 <!-- <div class="row"> -->
-                    <div class="row service-wrapper" *ngFor="let service of serviceInfo">
-                        <div class="service_info col-md-6">
-                            <h3>{{ service.h3 }}</h3>
-                            {{ service.info }}
-                        </div>
-                        <div class="imgService col-md-6">
-                            <img [src]="service.url" alt="img-services">
-                        </div>
+                <div class="row service-wrapper" *ngFor="let service of serviceInfo">
+                    <div class="service_info col-md-6">
+                        <h3>{{ service.h3 }}</h3>
+                        {{ service.info }}
+                    </div>
+                    <div class="imgService col-md-6">
+                        <img [src]="service.url" alt="img-services">
                     </div>
                 </div>
-                <div class="info">
-                        If you are thinking about getting permanent makeup done, research is important.  
-                        Research the procedure and aftercare, research the artist, as well as success stories.  
-                        Magazines such as Cosmo, Instyle, Elle and many other publications offer information about risks and the benefits of the procedures. 
-                        Check this one out:  Celebrities with permanent makeup
-                        Click to see my Facebook page for photos and reviews. 
-                        Add call email button
-                        Read more about the permanent makeup Process (link to process page)
-                        
+                <div class="row info">
+                    If you are thinking about getting permanent makeup done, research is important.
+                    Research the procedure and aftercare, research the artist, as well as success stories.
+                    Magazines such as Cosmo, Instyle, Elle and many other publications offer information about risks and the
+                    benefits of the procedures.
+                    Check this one out: Celebrities with permanent makeup
+                    Click to see my Facebook page for photos and reviews. Read more about the permanent makeup Process...
+                    <div class="communication-block">
+                        <a href="mailto:mailto:nataliya.hocko@gmail.com"
+                            class="portfolio-btn animated fadeInDown btn-4 topLink">Email
+                        </a>
+
+                        <a class="portfolio-btn ">
+                            Process
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </div>
     </div>
-    <app-footer></app-footer>
+</div>
+<app-footer></app-footer>
