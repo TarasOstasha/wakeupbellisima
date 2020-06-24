@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
         swal.fire({
           icon: "success",
           title: "success",
-          text: "Thanks For Request! We will contact you as soon as we can!",
+          text: "Thank you for the review!",
           type: "success"
         })
       } else {

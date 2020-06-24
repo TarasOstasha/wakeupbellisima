@@ -43,7 +43,7 @@ export class ServicesComponent implements OnInit {
       url: '../../../assets/imgs/3.jpg'
     },
     {
-      h3: 'Additional Procedures:Eyelash Extensions',
+      h3: 'Eyelash Lifting',
       info: `Eyelash Extensions look like real lashes with a natural and weightless feel.
       These lashes are considered a “semi-permanent,” and are applied by attaching
       a synthetic eyelash to your natural eyelash. The application is painless;
