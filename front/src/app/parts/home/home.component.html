@@ -82,7 +82,9 @@
 
             </p>
         </div>
+        
         <div class="google-review-wrapper">
+                
             <h2>Reviews</h2>
             <div class="reviews-container">
                 <div id="google-reviews">
@@ -97,13 +99,17 @@
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
-                                {{ review.stars }} <i>from 5</i>
+                                <!-- {{ review.stars }} <i>from 5</i> -->
+                                {{ review.stars }}
                             </div>
                             <div class="customer-msg">
                                 {{ review.messageReview }}
                             </div>
-                            <div class="date">
+                            <div class="date" *ngIf="isDate(review.created)">
                                 {{ review.created | date }}
+                            </div>
+                            <div class="date" *ngIf="!isDate(review.created)">
+                                    {{ review.created  }}
                             </div>
 
                             <!-- {{ review._id }} -->

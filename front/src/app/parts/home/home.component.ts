@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 declare var swal: any;
+declare var jQuery: any;
+declare var $: any;
 import appState from '../../appState';
 
 @Component({
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
     })
   }
   ngOnInit() {
+    this.getGoogleReviews();
     // setTimeout(() => {
       this.getReview();
     // }, 1000)
@@ -110,7 +113,7 @@ export class HomeComponent implements OnInit {
   // get review
   async getReview() {
     const fromServer: any = await this.api.getMsgsReview();
-    this.appState.reviewMsg = fromServer.data;
+    this.appState.reviewMsg = [ ...fromServer.data, ...fromServer.googleData ];
     console.log(this.appState.reviewMsg, 'reviewMsg from server')
 
   }
@@ -130,5 +133,22 @@ export class HomeComponent implements OnInit {
   switchTextFlag() {
     this.paragraphFlag = !this.paragraphFlag;
   }
+
+  getGoogleReviews() {
+  //   jQuery(document).ready(function( $ ) {
+  //     $("#google-reviews").googlePlaces({
+  //          placeId: 'ChIJp-KrwRv5wokRkx8JiGNLszk' //Find placeID @: https://developers.google.com/places/place-id
+  //        , render: ['reviews']
+  //        , min_rating: 4
+  //        , max_rows:4
+  //     });
+  //  });
+  }
+
+  isDate(date) {
+    const dateObj: any = new Date(date);
+    return ( dateObj !== "Invalid Date") && !isNaN(dateObj );
+  }
+
 
 }

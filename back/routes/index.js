@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 require('dotenv').config()
+const reviewsArray = require('../puppeteer.js');
 
 // mongoose
 const User = require('../models/users');
@@ -335,7 +336,8 @@ router.post('/review-msg', async (req, res) => {
 // get review-msgs
 router.get('/review-msgs', async (req, res) => {
   const msg = await ReviewMessage.find();
-  res.json({ ok: true, data: msg })
+  const googleReviews = await reviewsArray();
+  res.json({ ok: true, data: msg, googleData: googleReviews.mainReviewArray })
 });
 
 //const details = require('../config/details.json');

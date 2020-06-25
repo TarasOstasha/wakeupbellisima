@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, Valid
 declare var swal: any;
 import { MouseEvent } from '@agm/core';
 import { Marker } from '../../interfaces/marker';
+declare var jQuery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-book-appointment',
