@@ -336,8 +336,10 @@ router.post('/review-msg', async (req, res) => {
 // get review-msgs
 router.get('/review-msgs', async (req, res) => {
   const msg = await ReviewMessage.find();
-  const googleReviews = await reviewsArray();
-  res.json({ ok: true, data: msg, googleData: googleReviews.mainReviewArray })
+  //const googleReviews = await reviewsArray();
+  //res.json({ ok: true, data: msg, googleData: googleReviews.mainReviewArray })
+  res.json({ ok: true, data: msg })
+
 });
 
 //const details = require('../config/details.json');

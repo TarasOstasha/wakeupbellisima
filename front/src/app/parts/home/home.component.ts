@@ -113,7 +113,9 @@ export class HomeComponent implements OnInit {
   // get review
   async getReview() {
     const fromServer: any = await this.api.getMsgsReview();
-    this.appState.reviewMsg = [ ...fromServer.data, ...fromServer.googleData ];
+    //this.appState.reviewMsg = [ ...fromServer.data, ...fromServer.googleData ];
+    this.appState.reviewMsg = fromServer.data;
+
     console.log(this.appState.reviewMsg, 'reviewMsg from server')
 
   }
