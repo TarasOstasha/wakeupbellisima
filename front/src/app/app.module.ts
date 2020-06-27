@@ -59,8 +59,8 @@ import { WorkingProcessComponent } from './pages/working-process/working-process
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      //apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU'
-      apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
+      apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU'
+      //apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
     }),
     FacebookModule.forRoot()
   ],
