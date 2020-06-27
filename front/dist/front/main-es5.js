@@ -5816,10 +5816,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _appState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../appState */
-    "./src/app/appState.ts");
+    "./src/app/appState.ts"); //var url = 'http://localhost/';
 
-    var url = 'http://localhost/'; //if(location.hostname == 'localhost') var url = 'http://localhost:81/'; //dev
-    //else var url = '/'; //production
+
+    if (location.hostname == 'localhost') var url = 'http://localhost:80/'; //dev
+    else var url = '/'; //production
 
     var httpOptions = {
       headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
