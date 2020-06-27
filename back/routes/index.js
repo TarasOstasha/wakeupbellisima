@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const fsFile = require('fs').promises;
-const fs = require('fs');
+const fs = require('fs'); // use only in function upload
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -384,7 +384,7 @@ async function sendMail(recipient, callback) {
 //redirect all get request to index.html. Must be the last!!!!!!!!!!!!!!!
 router.get('/*', async (req, res, next) => {
   try {
-    const html = await fs.readFile('../front/dist/front/index.html');
+    const html = await fsFile.readFile('../front/dist/front/index.html');
     res.end(html);
     // res.redirect('/index.html');
   } catch (error) {
