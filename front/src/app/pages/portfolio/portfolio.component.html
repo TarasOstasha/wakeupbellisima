@@ -4,7 +4,7 @@
     <div class="container">
         <ul class="row" id="grid-container">
             <div class="col-md-4" *ngFor="let img of appState.portfolioImg; let i = index;">
-                <a  data-fancybox="gallery" data-caption="Portfolio" rel="group" [href]=" url + 'imgs/' + img.url "
+                <a class="defaultImg"  data-fancybox="gallery" data-caption="Portfolio" rel="group" [href]=" url + 'imgs/' + img.url "
                     data-width="800" data-height="600">
                     <!-- <li rel="group" [style.backgroundImage]="'url('+ url + 'imgs/' + img.url +')'"> -->
                         <!-- <img [src]=" url+ 'imgs/' + img.url "> -->

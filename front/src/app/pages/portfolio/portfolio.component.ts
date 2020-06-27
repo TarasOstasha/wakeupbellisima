@@ -52,6 +52,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       //console.log('sadsadsadasdsadas')
       //this.reloadImgFlag = false;
       this.appState.portfolioImg = fromServer;
+      console.log(this.appState)
       //}, 500)
       //$(".fancy").fancybox();
     } catch (error) {
