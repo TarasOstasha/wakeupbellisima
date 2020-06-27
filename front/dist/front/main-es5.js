@@ -478,8 +478,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       providers: [_services_api_service__WEBPACK_IMPORTED_MODULE_17__["ApiService"], _services_storage_service__WEBPACK_IMPORTED_MODULE_18__["StorageService"]],
       imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _agm_core__WEBPACK_IMPORTED_MODULE_15__["AgmCoreModule"].forRoot({
-        //apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU'
-        apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
+        apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU' //apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
+
       }), ngx_facebook__WEBPACK_IMPORTED_MODULE_16__["FacebookModule"].forRoot()]]
     });
 
@@ -498,8 +498,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         args: [{
           declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"], _parts_header_header_component__WEBPACK_IMPORTED_MODULE_6__["HeaderComponent"], _parts_footer_footer_component__WEBPACK_IMPORTED_MODULE_7__["FooterComponent"], _pages_main_main_component__WEBPACK_IMPORTED_MODULE_8__["MainComponent"], _parts_home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"], _pages_services_services_component__WEBPACK_IMPORTED_MODULE_10__["ServicesComponent"], _pages_portfolio_portfolio_component__WEBPACK_IMPORTED_MODULE_11__["PortfolioComponent"], _pages_about_us_about_us_component__WEBPACK_IMPORTED_MODULE_12__["AboutUsComponent"], _pages_book_appointment_book_appointment_component__WEBPACK_IMPORTED_MODULE_13__["BookAppointmentComponent"], _pages_auth_auth_component__WEBPACK_IMPORTED_MODULE_14__["AuthComponent"], _parts_form_validator_form_validator_component__WEBPACK_IMPORTED_MODULE_19__["FormValidatorComponent"], _pages_redirector_redirector_component__WEBPACK_IMPORTED_MODULE_20__["RedirectorComponent"], _parts_carousel_carousel_component__WEBPACK_IMPORTED_MODULE_21__["CarouselComponent"], _parts_star_rating_star_rating_component__WEBPACK_IMPORTED_MODULE_22__["StarRatingComponent"], _pages_eyes_eyes_component__WEBPACK_IMPORTED_MODULE_23__["EyesComponent"], _pages_lips_lips_component__WEBPACK_IMPORTED_MODULE_24__["LipsComponent"], _pages_corrective_corrective_component__WEBPACK_IMPORTED_MODULE_25__["CorrectiveComponent"], _pages_working_process_working_process_component__WEBPACK_IMPORTED_MODULE_26__["WorkingProcessComponent"]],
           imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _agm_core__WEBPACK_IMPORTED_MODULE_15__["AgmCoreModule"].forRoot({
-            //apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU'
-            apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
+            apiKey: 'AIzaSyCozMa2qbqp2x59SjJvzIOKGXlXQNtQXZU' //apiKey: 'AIzaSyDD3OIX2BqH8WjNMj2EPQQpAqAu4SN2848'
+
           }), ngx_facebook__WEBPACK_IMPORTED_MODULE_16__["FacebookModule"].forRoot()],
           providers: [_services_api_service__WEBPACK_IMPORTED_MODULE_17__["ApiService"], _services_storage_service__WEBPACK_IMPORTED_MODULE_18__["StorageService"]],
           bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
