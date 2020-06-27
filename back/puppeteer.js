@@ -88,8 +88,8 @@ async function refreshReviews() {
     // });
 }
 setTimeout(() =>{
-    refreshReviews();
-}, )
+    refreshReviews(); // refresh and add new reviews (if added) every 12 hours
+}, 700000)
 
 
 

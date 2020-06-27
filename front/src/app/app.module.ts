@@ -29,6 +29,7 @@ import { StarRatingComponent } from './parts/star-rating/star-rating.component';
 import { EyesComponent } from './pages/eyes/eyes.component';
 import { LipsComponent } from './pages/lips/lips.component';
 import { CorrectiveComponent } from './pages/corrective/corrective.component';
+import { WorkingProcessComponent } from './pages/working-process/working-process.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CorrectiveComponent } from './pages/corrective/corrective.component';
     StarRatingComponent,
     EyesComponent,
     LipsComponent,
-    CorrectiveComponent
+    CorrectiveComponent,
+    WorkingProcessComponent
   ],
   imports: [
     BrowserModule,

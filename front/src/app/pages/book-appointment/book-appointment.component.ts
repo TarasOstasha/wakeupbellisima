@@ -76,14 +76,14 @@ export class BookAppointmentComponent implements OnInit {
           icon: "success",
           title: "success",
           text: "Thanks For Request! We will contact you as soon as we can!",
-          type: "success"
+          //type: "success"
         })
       } else {
         swal.fire({
           icon: "error",
           title: "Error",
           text: "Please Fill Out The Form",
-          type: "warning"
+          //type: "warning"
         })
       }
     } catch (error) {

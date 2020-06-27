@@ -4,20 +4,41 @@
             <h1>
                 beautiful all day...
                 <br>
-                beautiful all night...    
+                beautiful all night...
             </h1>
             <a routerLink="/book-appointment" class="portfolio-btn animated fadeInDown btn-4 topLink">
-                Join us
+                Join me
             </a>
         </div>
     </div>
+    <!-- LARGE MONITOR -->
     <li class="slides" *ngFor="let slideImg of imgSlides; let i = index;"
-        [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" >
+        [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide">
         <img [src]="slideImg.img" alt="slide image" class="slide" [style.width.px]="centerSlideWidth">
     </li>
+
 
     <div class="controls">
         <div (click)="moveLeft()" class="control prev-slide"><i class="fa fa-angle-left"></i> </div>
         <div (click)="moveRight()" class="control next-slide"><i class="fa fa-angle-right"></i></div>
     </div>
+</ul>
+
+<!-- MOBILE IMG -->
+<ul class="slides-mobile ">
+        <div class="title-wrapper">
+                <div class="title">
+                    <h1>
+                        beautiful all day...
+                        <br>
+                        beautiful all night...
+                    </h1>
+                    <a routerLink="/book-appointment" class="portfolio-btn animated fadeInDown btn-4 topLink">
+                        Join me
+                    </a>
+                </div>
+            </div>
+    <li>
+        <img [src]="imgSlidesMobile.img" alt="mobile-img">
+    </li>
 </ul>

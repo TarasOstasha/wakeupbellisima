@@ -20,7 +20,6 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   constructor(private api: ApiService, private http: HttpClient) { }
 
   async ngOnInit() {
-    //console.log(appState)
     this.reloadImg();
     this.lazyInit();
   }

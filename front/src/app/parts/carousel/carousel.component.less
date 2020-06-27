@@ -11,9 +11,11 @@
     // ////////////
     display: flex;
 }
+
 .carousel:hover .controls {
     opacity: 1;
 }
+
 .carousel .controls {
     opacity: 0;
     display: flex;
@@ -25,6 +27,7 @@
     z-index: 99999;
     //transition: all ease 0.5s;
 }
+
 .carousel .controls .control {
     margin: 0 5px;
     display: flex;
@@ -38,19 +41,22 @@
     //transition: ease 0.3s;
     cursor: pointer;
 }
+
 .carousel .controls .control:hover {
     opacity: 1;
 }
+
 .slides {
     //position: absolute;
     //top: 50%;
     //left: 0;
-   // transform: translateY(-50%);
+    // transform: translateY(-50%);
     //display: flex;
     width: 100%;
     transition: 1s ease-in-out all;
     list-style: none;
 }
+
 // .carousel .slides .slide {
 //     min-width: 100%;
 //     min-height: 250px;
@@ -73,6 +79,7 @@
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+
     .title {
         display: flex;
         flex-direction: column;
@@ -86,14 +93,16 @@
         //margin: 0 auto;
         //border: 1px solid #fff;
     }
+
     h1 {
-       color: #fff;
-       text-align: left;
-       margin: 0;
-       font-size: 35px;
-       //padding: 25px 50px;
+        color: #fff;
+        text-align: left;
+        margin: 0;
+        font-size: 35px;
+        //padding: 25px 50px;
     }
 }
+
 .portfolio-btn {
     max-width: 130px;
     font-size: 20px;
@@ -109,6 +118,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     &:hover {
         text-decoration: none;
         color: #fff;
@@ -117,9 +127,57 @@
     }
 }
 
+.slides-mobile {
+    display: none;
+
+    img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .title {
+        //padding: 25px 0 25px 50px!important;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+
+        h1 {
+            font-size: 25px;
+        }
+
+        .portfolio-btn {
+            padding: 5px;
+            font-size: 15px;
+            //z-index: 10;
+        }
+    }
+
+    .carousel {
+        display: none;
+    }
+
+    .slides-mobile {
+        display: block;
+        padding: inherit;
+
+        li {
+            list-style: none;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+}
 
 
 
+// @media only screen and (min-width: 481px) and (max-width: 767px) {
 
-
-
+//     //Put your CSS here for 200px to 767px width devices (cover all mobile portrait width //
+//     .wrapper {
+//         padding: 50px 0 !important;
+//     }
+// }

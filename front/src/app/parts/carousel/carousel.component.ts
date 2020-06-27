@@ -20,6 +20,10 @@ export class CarouselComponent implements OnInit {
     { img: '../../assets/imgs/banner7.jpg' },
   ]
 
+  imgSlidesMobile = 
+    { img: '../../assets/imgs/mobile.jpg' }
+  
+
   currentSlide = 0;
   startSlider;
   nextSlider = null;
@@ -62,6 +66,7 @@ export class CarouselComponent implements OnInit {
     if (this.counter <= 0) { this.counter = lastImg + 1; return this.slide = -this.sliderWidth() * lastImg; }
   }
   moveRight() {
+    //console.log(this.sliderWidth())
     this.counter++
     const lastImg = this.imgSlides.length - 1;
     this.nextSlide = this.sliderWidth();

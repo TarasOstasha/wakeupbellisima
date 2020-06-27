@@ -12,6 +12,7 @@ import { RedirectorComponent } from './pages/redirector/redirector.component';
 import { EyesComponent } from './pages/eyes/eyes.component';
 import { LipsComponent } from './pages/lips/lips.component';
 import { CorrectiveComponent } from './pages/corrective/corrective.component';
+import { WorkingProcessComponent } from './pages/working-process/working-process.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'book-appointment', component: BookAppointmentComponent },
   { path: 'auth', component: AuthComponent },
-  { path: 'redirector', component: RedirectorComponent }
+  { path: 'redirector', component: RedirectorComponent },
+  { path: 'process', component: WorkingProcessComponent }
 ];
 
 @NgModule({

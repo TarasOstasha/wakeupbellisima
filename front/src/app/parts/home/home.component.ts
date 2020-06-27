@@ -54,7 +54,6 @@ export class HomeComponent implements OnInit {
     })
   }
   ngOnInit() {
-    this.getGoogleReviews();
     // setTimeout(() => {
       this.getReview();
     // }, 1000)
@@ -136,18 +135,8 @@ export class HomeComponent implements OnInit {
     this.paragraphFlag = !this.paragraphFlag;
   }
 
-  getGoogleReviews() {
-  //   jQuery(document).ready(function( $ ) {
-  //     $("#google-reviews").googlePlaces({
-  //          placeId: 'ChIJp-KrwRv5wokRkx8JiGNLszk' //Find placeID @: https://developers.google.com/places/place-id
-  //        , render: ['reviews']
-  //        , min_rating: 4
-  //        , max_rows:4
-  //     });
-  //  });
-  }
 
-  isDate(date) {
+  isDate(date) { // CHECK IF DATE REAL
     const dateObj: any = new Date(date);
     return ( dateObj !== "Invalid Date") && !isNaN(dateObj );
   }
