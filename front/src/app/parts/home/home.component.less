@@ -1,3 +1,4 @@
+@import url('../../../assets/fonts/font.less');
 .wrapper {
     min-height: 100%;
 }
@@ -54,10 +55,11 @@
       font-family: 'Architects Daughter', cursive;
     }
     .text {
+      .infoText(@info);
       text-align: justify;
       padding: 50px 0;
-      font-family: 'Architects Daughter';
-      font-size: 20px;
+      //font-family: 'Architects Daughter';
+      //font-size: 20px;
       .readMore {
         span {
           font-weight: bold;

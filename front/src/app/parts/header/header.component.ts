@@ -12,6 +12,7 @@ import { StorageService } from '../../services/storage.service';
 export class HeaderComponent implements OnInit {
   appState = appState;
   subMenuFlag: boolean = false;
+  navbarCollapse: boolean = false;
 
 
   servicesSub = [
@@ -63,6 +64,10 @@ export class HeaderComponent implements OnInit {
   hideServicesSubMenu() {
    // console.log('hide toogle');
     this.subMenuFlag = false;
+  }
+
+  toggleNavbar() {
+    this.navbarCollapse = !this.navbarCollapse;
   }
 
 }
