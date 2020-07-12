@@ -1,5 +1,8 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
-    <a class="navbar-brand" href="#"><strong>LOGO</strong></a>
+    <a class="navbar-brand" href="#">
+        <!-- <strong>LOGO</strong> -->
+        <img src="../../../assets/imgs/logo-wakeupbellisim-white-small2.png" alt="logo-wakeupbellisima">
+    </a>
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse">
         <span class="navbar-toggler-icon"></span>
     </button> -->
@@ -11,7 +14,7 @@
             <li class="nav-item" routerLinkActive="active">
                 <a routerLink="/main" class="nav-link">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" routerLinkActive="active" (mouseenter)="showServicesSubMenu()" (mouseleave)="hideServicesSubMenu()">
+            <li class="nav-item services" routerLinkActive="active" (mouseenter)="showServicesSubMenu()" (mouseleave)="hideServicesSubMenu()">
                 <a routerLink="/services" class="nav-link">Services</a>
                 <ul class="services-sub-list" *ngIf="subMenuFlag">
                     <li *ngFor="let sub of servicesSub" routerLinkActive="active">

@@ -34,10 +34,25 @@
         text-decoration: none;
     }
 }
+.navbar-brand > img {
+    width: 50px;
+    height: 50px;
+}
 @media screen and (max-width: 480px)  
 {
     .fixed-top
     {
         position: inherit;
     }   
+}
+
+@media screen and (max-width: 991px)  {
+    li.services {
+        position: relative;
+        .services-sub-list {
+            position: inherit;
+            width: 100%;
+            height: fit-content;
+        }
+    }
 }
