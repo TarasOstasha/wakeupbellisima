@@ -66,10 +66,10 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
 
     $(document).ready(function () { //Photos Gallery
-      $('[data-fancybox="gallery"]').fancybox({
-        //Options will go here
-        loop: true
-      });
+      // $('[data-fancybox="gallery"]').fancybox({
+      //   //Options will go here
+      //   loop: true
+      // });
     });
   }
   ngOnDestroy() {

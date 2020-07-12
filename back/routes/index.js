@@ -274,7 +274,8 @@ router.post('/login', async (req, res) => {
           isLogged: user.isLogged
         }, process.env.JWT_KEY,
           {
-              expiresIn: "1h"
+              //expiresIn: "1h"
+              algorithm: 'HS256'
           },
 
         )
