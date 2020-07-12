@@ -265,6 +265,7 @@ router.post('/login', async (req, res) => {
     if (!user) return res.json({ ok: false, message: 'this user not exist' });
     bcrypt.compare(req.body.password, user.password, (err, result) => {
       if (err) return res.status(401).json({ message: 'Auth failed' });
+      var privateKey = fs.readFileSync('../bin/keys/private.key');
       if (result) {
         const token = jwt.sign({
           email: user.email,
@@ -272,7 +273,9 @@ router.post('/login', async (req, res) => {
           userName: user.userName,
           role: user.role,
           isLogged: user.isLogged
-        }, process.env.JWT_KEY,
+        }, 
+        //process.env.JWT_KEY,
+        privateKey,
           {
               //expiresIn: "1h"
               algorithm: 'HS256'
