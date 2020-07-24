@@ -4,7 +4,7 @@ import  appState  from '../appState';
 
 //var url = 'http://localhost/';
 
-if(location.hostname == 'localhost') var url = 'http://localhost:80/'; //dev
+if(location.hostname == 'localhost') var url = 'http://localhost:80/' //dev
 else var url = '/'; //production
 
 const httpOptions = {
