@@ -228,3 +228,10 @@ function callSendAPI(sender_psid, response) {
 
 
 // curl -X GET "https://93e0dea42d69.ngrok.io/webhook?hub.verify_token=dsbfjhdsbfjhdsbfjhbjhb3hbfjdhsbvjds&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+
+
+
+// Callback URL
+// https://93e0dea42d69.ngrok.io/webhook
+
+
