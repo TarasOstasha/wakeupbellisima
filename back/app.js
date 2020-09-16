@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
 const User = require('./models/users');
+const forceDomain = require('forcedomain'); // for redirect to HTTPS
 //const user = require('./models/user');
 
 // connect to the database
@@ -48,6 +49,11 @@ app.use(function(req, res, next) {
   } else
     next();
 });
+
+app.use(forceDomain({
+  hostname: 'wakeupbellisima.com',
+  protocol: 'https'
+}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
