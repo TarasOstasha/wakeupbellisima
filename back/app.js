@@ -64,7 +64,7 @@ function handleRedirect(req, res) {
   const targetUrl = targetBaseUrl + req.originalUrl;
   res.redirect(targetUrl);
 }
-app.use(handleRedirect);
+app.use('https://wakeupbellisima.com', handleRedirect);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
