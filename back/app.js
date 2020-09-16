@@ -44,17 +44,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // redirect
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production') {
-      if (req.headers.host === 'wakeupbellisima.com')
-          return res.redirect(301, 'https://wakeupbellisima.com');
-      if (req.headers['x-forwarded-proto'] !== 'https')
-          return res.redirect('https://' + req.headers.host + req.url);
-      else
-          return next();
-  } else
-      return next();
-});
+function requireHTTPS(req, res, next) {
+  if (!req.secure) {
+         return res.redirect('https://' + req.get('host') + req.url);
+   }
+       next();
+}
+app.use(requireHTTPS);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
