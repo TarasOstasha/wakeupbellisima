@@ -40,7 +40,11 @@ https.createServer(options ,app).listen(443); // old 443
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+//var server = http.createServer(app); // old one
+var server = http.createServer((req, res) => {
+  res.writeHead(301,{Location: `https://${req.headers.host}${req.url}`});
+  res.end();
+});
 
 /**
  * Listen on provided port, on all network interfaces.
