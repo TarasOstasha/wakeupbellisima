@@ -43,6 +43,19 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// redirect
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+      if (req.headers.host === 'wakeupbellisima.com')
+          return res.redirect(301, 'https://wakeupbellisima.com');
+      if (req.headers['x-forwarded-proto'] !== 'https')
+          return res.redirect('https://' + req.headers.host + req.url);
+      else
+          return next();
+  } else
+      return next();
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -60,18 +73,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-// redirect
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production') {
-      if (req.headers.host === 'wakeupbellisima.com')
-          return res.redirect(301, 'https://wakeupbellisima.com');
-      if (req.headers['x-forwarded-proto'] !== 'https')
-          return res.redirect('https://' + req.headers.host + req.url);
-      else
-          return next();
-  } else
-      return next();
-});
+
 
 
 
