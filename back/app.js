@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
 const User = require('./models/users');
-//const forceDomain = require('forcedomain'); // for redirect to HTTPS
-var secure = require('express-force-https'); // for redirect to HTTPS
+const forceDomain = require('forcedomain'); // for redirect to HTTPS
+//var secure = require('express-force-https'); // for redirect to HTTPS
 //const user = require('./models/user');
 
 // connect to the database
@@ -24,7 +24,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 app.use(cors());
 app.use(bodyParser({ limit: '11111111mb' }));
-app.use(secure); // for redirect to HTTPS
+//app.use(secure); // for redirect to HTTPS
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,11 +52,11 @@ app.use('/users', usersRouter);
 //     next();
 // });
 
-// app.use(forceDomain({
-//   hostname: 'wakeupbellisima.com',
-//   port: 80,
-//   protocol: 'https'
-// }));
+app.use(forceDomain({
+  hostname: 'wakeupbellisima.com',
+  port: 80,
+  protocol: 'https'
+}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
