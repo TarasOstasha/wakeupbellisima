@@ -58,13 +58,11 @@ app.use('/users', usersRouter);
 //   protocol: 'https'
 // }));
 
-const targetBaseUrl = 'https://www.wakeupbellisima.com/';
+var redirector = require("redirect-https")({
+  body: "<!-- Hello Developer! Please use HTTPS instead: {{ URL }} -->"
+});
 
-function handleRedirect(req, res) {
-  const targetUrl = targetBaseUrl + req.originalUrl;
-  res.redirect(targetUrl);
-}
-app.use('https://wakeupbellisima.com', handleRedirect);
+app.use("/", redirector);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
