@@ -62,14 +62,15 @@ app.use(function (err, req, res, next) {
 
 // redirect
 app.use((req, res, next) => {
-  if (req.headers.host === 'wakeupbellisima.com') {
-    return res.redirect(301, 'https://www.wakeupbellisima.com');
-  }
-  if (req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect('https://' + req.headers.host + req.url);
-  } else {
-    return next();
-  }
+  if (process.env.NODE_ENV === 'production') {
+      if (req.headers.host === 'wakeupbellisima.com')
+          return res.redirect(301, 'https://wakeupbellisima.com');
+      if (req.headers['x-forwarded-proto'] !== 'https')
+          return res.redirect('https://' + req.headers.host + req.url);
+      else
+          return next();
+  } else
+      return next();
 });
 
 
