@@ -45,12 +45,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // redirect to HTTPS
-// app.use(function(req, res, next) {
-//   if ((req.get('X-Forwarded-Proto') !== 'https')) {
-//     res.redirect('https://' + req.get('Host') + req.url);
-//   } else
-//     next();
-// });
+app.use(function(req, res, next) {
+  if ((req.get('X-Forwarded-Proto') !== 'https')) {
+    res.redirect('https://' + req.get('www.wakeupbellisima.com') + req.url);
+  } else
+    next();
+});
 
 // app.use(forceDomain({
 //   hostname: 'wakeupbellisima.com',
@@ -58,11 +58,6 @@ app.use('/users', usersRouter);
 //   protocol: 'https'
 // }));
 
-var redirector = require("redirect-https")({
-  body: "<!-- Hello Developer! Please use HTTPS instead: {{ URL }} -->"
-});
-
-app.use("/", redirector);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
