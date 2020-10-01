@@ -14,14 +14,18 @@
             <li class="nav-item" routerLinkActive="active">
                 <a routerLink="/main" class="nav-link">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item services" routerLinkActive="active" (mouseenter)="showServicesSubMenu()" (mouseleave)="hideServicesSubMenu()">
+            <li class="nav-item services" routerLinkActive="active">
+                <a routerLink="/services" class="nav-link">Services</a>
+            </li>
+            <!-- if we are going to use drop down menu -->
+            <!-- <li class="nav-item services" routerLinkActive="active" (mouseenter)="showServicesSubMenu()" (mouseleave)="hideServicesSubMenu()">
                 <a routerLink="/services" class="nav-link">Services</a>
                 <ul class="services-sub-list" *ngIf="subMenuFlag">
                     <li *ngFor="let sub of servicesSub" routerLinkActive="active">
                         <a [routerLink]="sub.route" >{{ sub.name }}</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             <li class="nav-item" routerLinkActive="active">
                 <a routerLink="/portfolio" class="nav-link">Portfolio</a>
             </li>
