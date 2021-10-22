@@ -27,8 +27,9 @@ app.set('port', port);
 //   cert: fs.readFileSync(__dirname + '/keys/server.crt')
 // }
 var options = {
-  ca: fs.readFileSync (__dirname +  '/keys/ca_bundle.crt'),
-  cert: fs.readFileSync(__dirname + '/keys/certificate.crt'),
+  //ca: fs.readFileSync (__dirname +  '/keys/ca_bundle.crt'),
+  //cert: fs.readFileSync(__dirname + '/keys/certificate.crt'),
+  cert: fs.readFileSync(__dirname + '/keys/wakeupbellisima.com.pem'),
   key: fs.readFileSync(__dirname + '/keys/private.key'),
  };
 /**
