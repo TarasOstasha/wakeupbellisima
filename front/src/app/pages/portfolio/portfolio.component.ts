@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
 import appState from '../../appState';
 
+import { Meta } from "@angular/platform-browser";
+
 declare var jQuery: any
 declare var $: any
 declare var swal: any;
@@ -17,11 +19,15 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   appState = appState;
   url = this.appState.hostName;
 
-  constructor(private api: ApiService, private http: HttpClient) { }
+  constructor(private api: ApiService, private http: HttpClient, private meta: Meta) { }
 
   async ngOnInit() {
     this.reloadImg();
     this.lazyInit();
+    this.meta.addTags([
+      { name: 'description', content: 'portfolio Page META description' },
+      { name: 'keywords', content: 'portfolio page meta keywords' }  
+    ]);
   }
 
   lazyInit() {

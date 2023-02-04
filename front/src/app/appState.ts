@@ -2,6 +2,7 @@ interface AppState {
   hostName: any,
   header: any,
   portfolioImg: any,
+  servicesImg: any,
   reviewMsg: any,
   //starRating: any,
   state_form: any,
@@ -21,6 +22,7 @@ const appState: AppState = {
     },
   },
   portfolioImg: [],
+  servicesImg: [],
   reviewMsg: [],
   //: [4.5],
   // for auth component

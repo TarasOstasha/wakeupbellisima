@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
 import  appState  from '../appState';
 
 //var url = 'http://localhost/';
+//var url = 'http://localhost:3000/'; // this just for the local use
 
-if(location.hostname == 'localhost') var url = 'http://localhost:80/' //dev
+
+if(location.hostname == 'localhost') var url = 'http://localhost:80/' //dev for production using
 else var url = '/'; //production
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+export interface Service {
+  _id: string;
+	serviceName: string;
+	serviceInfo: string;
+	imagePath: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -70,5 +79,45 @@ export class ApiService {
     return this.http.get( url + 'review-msgs' ).toPromise();
   }
 
+  getServicePosts() {
+    return this.http.get(url + 'my-service').toPromise();
+  }
+
+  editServicePost(data: any, imagePath: File) {
+    //console.log(data,imagePath)
+    const postData: any = new FormData();
+    postData.append('_id', data._id);
+    postData.append('serviceName', data.serviceName);
+    postData.append('serviceInfo', data.serviceInfo);
+    postData.append('imagePath', imagePath);
+    //console.log(postData)
+    return this.http.patch( url + `my-service/${data._id}`, postData, { reportProgress: true, observe: 'events', })//.toPromise();
+    // .subscribe(
+    //   (response) => console.log(response),
+    //   (erorr) => console.log(erorr)
+    // )
+
+
+  }
+
+  removeService(service: Service) {
+    //console.log(service._id);
+    //return this.http.delete( url + `my-service/${service._id}`).toPromise();
+    return this.http.delete( url + `my-service/${service._id}`)//.toPromise();
+  }
+
+  addService(data: any, image: File) {
+    //console.log(data)
+    const postData: any = new FormData();
+    postData.append('serviceName', data.serviceName);
+    postData.append('serviceInfo', data.serviceInfo);
+    postData.append('image', image);
+    //console.log(postData)
+    return this.http.post( url + 'my-service', postData).toPromise();
+    // .subscribe(
+    //   (response) => console.log('add new post service response',response),
+    //   (erorr) => console.log(erorr)
+    // )
+  }
   
 }

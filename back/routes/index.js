@@ -7,10 +7,13 @@ var jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 const reviewsArray = require('../puppeteer.js');
+const multer = require('multer');
+const chalk = require('chalk');
 
 // mongoose
 const User = require('../models/users');
 const ReviewMessage = require('../models/review');
+const Service = require('../models/serviceModel');
 //var cors = require('cors');
 //let portfolioImgsList;
 
@@ -18,6 +21,157 @@ const ReviewMessage = require('../models/review');
 // router.get('/', function (req, res, next) {
 //   res.render('index', { title: 'Express' });
 // });
+
+// ************** services page upload img *****************
+const MIME_TYPE_MAP = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg'
+};
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      const isValid = MIME_TYPE_MAP[file.mimetype];
+      let error = new Error('Invalid mime type');
+      if(isValid) {
+          error = null;
+      }
+      cb(null, 'downloads/service-images')
+      //cb(null, 'front/dist/front/assets/imgs/service-imgs')
+  },
+  filename: (req, file, cb) => {
+      const name = file.originalname.toLowerCase().split(' ').join('-');
+      const ext = MIME_TYPE_MAP[file.mimetype];
+      cb(null, name + '-' + Date.now() + '.' + ext);
+  }
+});
+
+// EDIT SERVICE POST
+router.patch('/my-service/:id', multer({ storage: storage }).single('imagePath'), async (req, res) => { // *** rebuid must servicePostData.imagePath come from fronend !!!!
+  try {
+      const url = req.protocol + '://' + req.get('host');
+      const { id } = req.params;
+      let servicePostData = req.body;
+      //if(req.file != undefined) servicePostData.imagePath = url + '/service-images/' + req.file.filename; // posibile issue
+      if(req.file != undefined) servicePostData.imagePath = url + '/service-images/' + req.file.filename; // posibile issue
+      // else {
+      //   servicePostData['image'] = servicePostData['imagePath'];
+      //   delete servicePostData['image'];
+      // }
+      //console.log(servicePostData, req.file, 'from front end')
+      const product = await Service.findById(id);
+      const fileName = product.imagePath.split('/').pop();
+      let imagePath = 'downloads/service-images/' + fileName;
+      //console.log(imagePath, 'imagePath')
+      if(req.file != undefined) {
+        fs.unlinkSync(imagePath);
+      }
+      // console.log(product,'from data base');
+      // if(!product) {
+      //   res.status(404).json({
+      //     message: 'the product with the given ID was not found'
+      //   })
+      // }
+      let query = {};
+      for(const key of Object.keys(servicePostData)) { // check obj key and swap if different
+        // console.log(chalk.red(servicePostData[key], 'servicePostData key'));
+        // console.log(chalk.blue(product[key], 'product key'));
+        if(servicePostData[key] !== product[key]) {
+          query[key] = servicePostData[key];
+        } 
+      }
+      //console.log(query, 'query')
+      const service = await Service.findOneAndUpdate( { _id: id } , { $set: query }, { new: true } );
+      // console.log(service)
+      // const service = await Service.findByIdAndUpdate(id, {
+      //   serviceName: serviceDataForm.editedServiceName,
+      //   serviceInfo: serviceDataForm.editedServiceInfo,
+      //   imagePath: url + '/service-images/' + req.file.filename
+      // }, { new: true });
+      //const service = await Service.findByIdAndUpdate(id, req.body, { new: true });
+      // loop through all items path and check if we have unusing img. If yes, remove it from file system ********
+      // const getAllServices = await Service.find();
+      // console.log(getAllServices);
+      res.status(200).json({
+          message: 'product updated successfully!!!',
+          data: service
+      });
+  } catch (error) {
+    res.status(501).json({ 
+      message: 'Server Error',
+      error: error
+    })
+  }
+
+});
+// GET SERVICE POST
+router.get('/my-service', async (req, res) => {
+  try {
+    const services = await Service.find();
+    res.status(200).json({
+      message: 'success',
+      data: services
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'error', error });
+  }
+});
+//CREATE SERVICE POST
+router.post('/my-service', multer({ storage: storage }).single('image'), async (req, res) => {
+  try {
+    const url = req.protocol + '://' + req.get('host');
+    const dataForm = req.body;
+    console.log(dataForm, 'dataForm from front end');
+    const servicePost = new Service({
+        serviceName: dataForm.serviceName,
+        serviceInfo: dataForm.serviceInfo,
+        imagePath: url + '/service-images/' + req.file.filename
+    });
+    await servicePost.save();
+    res.status(201).json({
+        message: 'product created successfully!!!',
+        data: servicePost,
+        ok: true
+    });
+  } catch (error) {
+    res.status(501).json({ 
+      message: 'Server Error',
+      error: error
+    })
+  }
+});
+// REMOVE SERVICE POST
+router.delete('/my-service/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    //console.log(req.params, 'deleted ID');
+    const imgUrl = await Service.findById(id);
+    const fileName = imgUrl.imagePath.split('/').pop();
+    let imagePath = 'downloads/service-images/' + fileName;
+    console.log(imagePath)
+    const removedPost = await Service.findByIdAndDelete(id, (err, docs) => {
+      if(err) console.log('Error', err) 
+      else {
+        fs.unlinkSync(imagePath);
+        console.log("Deleted : ", docs);
+      }
+    });
+    //fs.unlinkSync(imagePath)
+    res.status(200).json({
+      message: 'Post Successfully deleted',
+      data: removedPost,
+      ok: true
+    })
+  } catch (error) {
+    res.status(501).json({ 
+      message: 'Server Issue',
+      error: error
+    })
+  }
+  
+
+});
+
+
 
 router.get('/portfolio-imgs', async (req, res) => {
   //const portfolioImgsList = await fs.readdir('downloads/imgs');

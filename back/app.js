@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
 const User = require('./models/users');
+const chalk = require('chalk');
 //const forceDomain = require('forcedomain'); // for redirect to HTTPS
 //var secure = require('express-force-https'); // for redirect to HTTPS
 //const user = require('./models/user');
@@ -23,7 +24,9 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 app.use(cors());
-app.use(bodyParser({ limit: '11111111mb' }));
+//app.use(bodyParser({ limit: '11111111mb' })); deprecated jun 23
+app.use(bodyParser.urlencoded({ limit: '11111111mb', extended: true })); // fixed
+app.use(bodyParser.json())
 //app.use(secure); // for redirect to HTTPS
 
 // view engine setup

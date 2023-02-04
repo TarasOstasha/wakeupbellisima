@@ -98,3 +98,49 @@
 .info {
   .infoText(@info);
 }
+
+
+
+// ADMIN role
+.admin-service-wrapper:hover {
+  background: rgba(0,0,0,.5);
+  z-index: 2;
+  cursor: pointer;
+  position: relative;
+  .change-btns {
+    display: block;
+  }
+  .imgService {
+    img {
+      z-index: 1;
+    } 
+    img:hover{
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+      -o-transform: scale(1);
+      z-index: 1
+    }
+  }
+  .hover-btns {
+    display: flex;
+  }
+}
+.change-btns {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: none;
+}
+.myWidth {
+  width: 100%;
+  min-width: 100%;
+}
+.progress_bar div {
+  width: 0%;
+  max-width: 100%;
+  background-color: green;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+}

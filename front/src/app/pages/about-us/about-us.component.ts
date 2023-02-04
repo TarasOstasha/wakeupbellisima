@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { style } from '@angular/animations';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { FormControl, Validators, FormGroup, FormBuilder, NgForm } from "@angular/forms";
+import { mimeType } from "../services/mime-type.validator";
+
+declare var $: any;
+declare var swal: any;
 
 
 @Component({
@@ -6,14 +12,40 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.less']
 })
-export class AboutUsComponent implements OnInit {
+export class AboutUsComponent implements AfterViewInit {
+  @ViewChild("slider_sertificate") onHoverref: ElementRef;
+  serviceForm: FormGroup;
+
+  public stopOnHover: HTMLElement;
   public slideWidth: any;
+  hovering: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+    //this.autoStart();
+        // for add service
+        this.serviceForm = new FormGroup({
+          serviceName: new FormControl(),
+          serviceInfo: new FormControl(),
+          image: new FormControl(null, {
+            validators: [Validators.required],
+            asyncValidators: [mimeType],
+          }),
+        });
+  }
+
+  ngAfterViewInit() {
+
+  }
+  mouseover() {
+    this.hovering = true;
+    console.log(this.hovering)
+  }
+  mouseleave() {
+    this.hovering = false;
+    console.log(this.hovering)
     
-    this.autoStart();
   }
 
   certificates = [
@@ -89,6 +121,50 @@ export class AboutUsComponent implements OnInit {
   // get dynamically width of <li> 
   sliderWidth() {
     return this.slideWidth.offsetWidth;
+  }
+
+
+  // add new service
+  myEventPost; // variable to reset input type file after submit
+  imagePreview: any;
+  onImagePickedAddService(event: Event) {
+    this.myEventPost = event;
+    const file = (event.target as HTMLInputElement).files[0];
+    this.serviceForm.patchValue({ image: file });
+    this.serviceForm.get("image").updateValueAndValidity();
+    const reader = new FileReader();
+    //console.log(reader)
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  async add() {
+    const servicePost = {
+      serviceName: this.serviceForm.value.serviceName,
+      serviceInfo: this.serviceForm.value.serviceInfo,
+      //image: this.serviceForm.controls.image.value
+    };
+    // const newPost: any = await this._api.addService(
+    //   servicePost,
+    //   this.serviceForm.value.image
+    // );
+    // if (newPost.ok) {
+    //   swal.fire({
+    //     title: "Good job!",
+    //     text: "Service Post successfully added",
+    //     icon: "success",
+    //   });
+    //   this.getServicePosts(); // rebuild view model
+    // }
+    // this.myEventPost.target.value = null;
+    // this.serviceForm.reset();
+    // $("#myModal").modal("hide");
+  }
+
+  close() {
+    $("#editModal").modal("hide");
+    //this.progressPercentage = 0;
   }
 
 }

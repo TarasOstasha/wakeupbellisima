@@ -15,7 +15,9 @@ var fs = require('fs');
  */
 
 //var port = normalizePort(process.env.PORT || '81');
- var port = normalizePort(process.env.PORT || '80');
+//var port = normalizePort(process.env.PORT || '3000'); // local using
+
+var port = normalizePort(process.env.PORT || '80'); // for production
 
 app.set('port', port);
 
@@ -35,14 +37,15 @@ var options = {
 /**
  * Create HTTPS server.
  */
-https.createServer(options ,app).listen(443); // old 443
+https.createServer(options ,app).listen(443); // old 443 // version for production
  
 /**
  * Create HTTP server.
  */
 
-//var server = http.createServer(app); // old one
-// redirect to https
+//var server = http.createServer(app); // old on for local using
+
+// redirect to https shoould be using on the production
 var server = http.createServer((req, res) => {
   res.writeHead(301,{Location: `https://${req.headers.host}${req.url}`});
   res.end();

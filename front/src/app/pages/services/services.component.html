@@ -4,14 +4,89 @@
     <div class="infoServices_box">
         <div class="row service-row">
             <div class="container">
-                <!-- <div class="row"> -->
-                <div class="row service-wrapper" *ngFor="let service of serviceInfo">
-                    <div class="service_info col-md-6">
-                        <h3>{{ service.h3 }}</h3>
-                        {{ service.info }}
+                <!-- <div class="row"> --> 
+                <div [class]="(appState.header.user.role === 'admin') ? 'row service-wrapper admin-service-wrapper' : 'row service-wrapper' " *ngFor="let service of appState.servicesImg;let i = index;">
+                    <div *ngIf="i % 2 === 1" class="service_info col-md-6">
+                        <h3>{{ service.serviceName }}</h3>
+                        {{ service.serviceInfo }}
                     </div>
-                    <div class="imgService col-md-6">
-                        <img [src]="service.url" alt="img-services">
+                    <div *ngIf="i % 2 === 1" class="imgService col-md-6">
+                        <img [src]="service.imagePath" alt="img-services">
+                    </div>
+                    <!-- chess layout -->
+                    <div *ngIf="i % 2 === 0" class="imgService col-md-6">
+                        <img [src]="service.imagePath" alt="img-services">
+                    </div>
+                    <div *ngIf="i % 2 === 0" class="service_info col-md-6"> 
+                        <h3>{{ service.serviceName }}</h3>
+                        {{ service.serviceInfo }}
+                    </div>
+                    <!-- Large modal -->
+                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button> -->
+
+
+                    <div class="change-btns communication-block hover-btns" *ngIf="appState.header.user.role == 'admin' ">
+                        <!-- <button (click)="edit(service,i)" class="portfolio-btn">Edit</button> -->
+                        <button (click)="edit(service,i)" class="portfolio-btn"  data-toggle="modal" data-target=".edit">Edit</button>
+                        <button (click)="remove(service,i)" class="portfolio-btn">Remove</button>
+                    </div>
+                </div>
+                <!-- edit service -->
+                <div class="modal fade edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="fasle" id="editModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="edit-service-wrapper">
+                                <form [formGroup]="editServiceForm" (ngSubmit)="sendEditedService()">
+                                    <input class="form-control" formControlName="serviceName" type="text">
+                                    <textarea class="form-control" formControlName="serviceInfo"></textarea>
+                                    <div class="filePicker">
+                                        <input type="file" #filePicker (change)="onImagePicked($event)">
+                                        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && editServiceForm.get('image').valid">
+                                            <img [src]="imagePreview">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" (click)="close()">
+                                          Close
+                                        </button>
+                                        <!-- <button type="button" class="btn btn-primary" type="submit" [disabled]="!editServiceForm.valid"> -->
+                                        <button type="button" class="btn btn-primary" type="submit">
+                                          Save changes
+                                        </button>
+                                    </div>
+                                </form>
+                                <!-- PROGRESS BAR -->
+                                <div class="progress_bar">
+                                    <div #myProgress>{{ progressPercentage }} %</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- add service -->
+                <button class="portfolio-btn myWidth" data-toggle="modal" data-target=".bd-example-modal-lg">Add New Service</button>
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="fasle" id="myModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <form [formGroup]="serviceForm" (ngSubmit)="add()">
+                                <input class="form-control" formControlName="serviceName" type="text" placeholder="PLease type name of the service">
+                                <textarea class="form-control" formControlName="serviceInfo" placeholder="PLease type info about your service"></textarea>
+                                <div class="filePicker">
+                                    <input type="file" #filePicker (change)="onImagePickedAddService($event)">
+                                    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && serviceForm.get('image').valid">
+                                        <img [src]="imagePreview">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">
+                                      Close
+                                    </button>
+                                    <button type="button" class="btn btn-primary" type="submit" [disabled]="!serviceForm.valid">
+                                      Save changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="row info">

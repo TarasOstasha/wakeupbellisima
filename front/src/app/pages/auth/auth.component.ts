@@ -95,9 +95,17 @@ export class AuthComponent implements OnInit {
       console.log(error)
     }
   }
-
+  disabledFlag: boolean;
   async singIn() {
     try {
+      if(this.authForm.controls.email.value == '' || this.authForm.controls.password.value == '') {
+        swal.fire({
+          title: "Error",
+          text: "Please, enter valid value",
+          icon: "error",
+        });
+        return false;
+      }
       //console.log(this.authForm)
       const userData = {
         email: this.authForm.controls.email.value,
