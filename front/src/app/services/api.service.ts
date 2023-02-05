@@ -103,7 +103,7 @@ export class ApiService {
   removeService(service: Service) {
     //console.log(service._id);
     //return this.http.delete( url + `my-service/${service._id}`).toPromise();
-    return this.http.delete( url + `my-service/${service._id}`)//.toPromise();
+    return this.http.delete( url + `my-service/${service._id}`).toPromise();
   }
 
   addService(data: any, image: File) {

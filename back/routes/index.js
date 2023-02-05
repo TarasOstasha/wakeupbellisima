@@ -143,7 +143,7 @@ router.post('/my-service', multer({ storage: storage }).single('image'), async (
 router.delete('/my-service/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    //console.log(req.params, 'deleted ID');
+    console.log(req.params, 'deleted ID');
     const imgUrl = await Service.findById(id);
     const fileName = imgUrl.imagePath.split('/').pop();
     let imagePath = 'downloads/service-images/' + fileName;
