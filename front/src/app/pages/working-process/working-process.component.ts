@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 declare var jQuery: any;
 declare var $: any;
 import appState from '../../appState';
@@ -8,7 +8,9 @@ import appState from '../../appState';
   templateUrl: './working-process.component.html',
   styleUrls: ['./working-process.component.less']
 })
-export class WorkingProcessComponent implements OnInit {
+export class WorkingProcessComponent implements OnInit, AfterViewInit {
+  @ViewChild('wrapper') wrapper: ElementRef;
+  isProcess: boolean;
   appState = appState;
 
   workingProcess = [
@@ -29,6 +31,16 @@ export class WorkingProcessComponent implements OnInit {
 
   ngOnInit(): void {
     $(".photoGroup").fancybox(); // to start fancyBox. However it's working without this line
+    // setTimeout(() =>{
+    //   if(location.pathname === '/process') this.isProcess = true; 
+    //   if(location.pathname === '/main') this.wrapper.nativeElement.style.padding = 0;
+    // },1000)
+
+  }
+
+  ngAfterViewInit() {
+    if(location.pathname === '/process') this.isProcess = true; 
+    if(location.pathname === '/main') this.wrapper.nativeElement.style.padding = 0;
   }
 
 }

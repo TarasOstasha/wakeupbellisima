@@ -1,5 +1,5 @@
-<app-header></app-header>
-<div class="wrapper">
+<app-header *ngIf="isProcess"></app-header>
+<div class="wrapper" #wrapper>
     <h1>Working Process</h1>
     <div class="container">
         <div class="row">
@@ -11,4 +11,4 @@
         </div>
     </div>
 </div>
-<app-footer></app-footer>
+<app-footer *ngIf="isProcess"></app-footer>

@@ -18,7 +18,7 @@
                     <br>
                     * NJ Board Certified Permanent Makeup Artist
                     <br>
-                    * Graduated member of  American Academy of Micropigmentation
+                    * Graduated member of American Academy of Micropigmentation
                     <br>
                     * Osha Certified
                     <br>
@@ -37,39 +37,59 @@
         </div>
         <div class="col-md-12">
             <div class="row_certificate">
-                <ul class="slider_sertificate" #slider_sertificate >
+                <!-- <ul class="slider_sertificate" #slider_sertificate>
                     <i (click)="move($event)" class="fa fa-arrow-circle-left left"></i>
-                    <li [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" class="slides col-md-4" (mouseover)="mouseover()" (mouseleave)="mouseleave()"
+                    <li [style.margin-left.px]="(i == currentSlide) ? slide : nextSlide" class="slides col-md-4"
+                        (mouseover)="mouseover()" (mouseleave)="mouseleave()"
                         *ngFor="let certificate of certificates;let i = index;">
                         <img [src]="certificate.url" alt="certificate">
                     </li>
                     <i (click)="move($event)" class="fa fa-arrow-circle-right right"></i>
-                </ul>
+                </ul> -->
+            </div>
+            <!-- MAIN NEW  -->
+            <!-- <div id="slick_slider" *ngIf="certificates$ | async as certificates">
+                <div *ngFor="let certificate of certificates.data; let i = index;">
+                    <img [src]="certificate.url" alt="certificate" class="imgCertificate">
+                </div>
+            </div> -->
+            <div id="slick_slider">
+                <div *ngFor="let certificate of certificates; let i = index;">
+                    <img [src]="certificate.url" alt="certificate" class="imgCertificate">
+                </div>
             </div>
         </div>
-        <!-- add sertificate -->
-        <button class="portfolio-btn myWidth" data-toggle="modal" data-target=".bd-example-modal-lg">Add New Sertificate</button>
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="fasle" id="myModal">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <form [formGroup]="serviceForm" (ngSubmit)="add()">
-                        <input class="form-control" formControlName="serviceName" type="text" placeholder="PLease type name of the service">
-                        <textarea class="form-control" formControlName="serviceInfo" placeholder="PLease type info about your service"></textarea>
-                        <div class="filePicker">
-                            <input type="file" #filePicker (change)="onImagePickedAddService($event)">
-                            <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && serviceForm.get('image').valid">
-                                <img [src]="imagePreview">
+        <!-- add certificate -->
+        <div *ngIf="appState.header.user.role == 'admin' ">
+            <button class="portfolio-btn myWidth" data-toggle="modal" data-target=".bd-example-modal-lg">Add New
+                Certificate</button>
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="fasle" id="myModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <form [formGroup]="serviceForm" (ngSubmit)="add()">
+                            <input class="form-control" formControlName="serviceName" type="text"
+                                placeholder="PLease type name of the service">
+                            <textarea class="form-control" formControlName="serviceInfo"
+                                placeholder="PLease type info about your service"></textarea>
+                            <div class="filePicker">
+                                <input type="file" #filePicker (change)="onImagePickedAddService($event)">
+                                <div class="image-preview"
+                                    *ngIf="imagePreview !== '' && imagePreview && serviceForm.get('image').valid">
+                                    <img [src]="imagePreview">
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">
-                                Close
-                            </button>
-                            <button type="button" class="btn btn-primary" type="submit" [disabled]="!serviceForm.valid">
-                                Save changes
-                            </button>
-                        </div>
-                    </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">
+                                    Close
+                                </button>
+                                <button type="button" class="btn btn-primary" type="submit"
+                                    [disabled]="!serviceForm.valid">
+                                    Save changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

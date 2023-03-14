@@ -1,11 +1,24 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { FormControl, Validators, FormGroup, FormBuilder, NgForm } from "@angular/forms";
-import { HttpClient,HttpHeaders,HttpEvent, HttpEventType,HttpRequest } from "@angular/common/http";
+import {
+  FormControl,
+  Validators,
+  FormGroup,
+  FormBuilder,
+  NgForm,
+} from "@angular/forms";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpEvent,
+  HttpEventType,
+  HttpRequest,
+} from "@angular/common/http";
 import appState from "../../appState";
 import { ApiService } from "../../services/api.service";
 import { mimeType } from "./mime-type.validator";
 import { pipe } from "rxjs";
 import { map } from "rxjs/operators";
+import { Meta, Title } from "@angular/platform-browser";
 
 export interface Service {
   _id: string;
@@ -40,10 +53,22 @@ export class ServicesComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _api: ApiService,
-    private _http: HttpClient
+    private _http: HttpClient,
+    private meta: Meta,
+    private title: Title
   ) {}
 
   async ngOnInit() {
+    // meta
+    this.title.setTitle("Permament makeup removal | lips | eye liner | eyebrows ");
+    this.meta.addTags([
+      {
+        name: "description", content: "Nataliya is an expert in application and removal of permament makeup for eyebrows, eyeliner and lips",
+      },
+      { name: "robots", content: "index, follow" },
+      { charset: "UTF-8" },
+      { name: "keywords", content: "application and removal of permament makeup" },
+    ]);
     // this.serviceForm = this._formBuilder.group({
     //   serviceName: ['', [Validators.required] ],
     //   serviceInfo: ['', [Validators.required, ] ],
@@ -250,38 +275,39 @@ export class ServicesComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  
-
   async sendEditedService() {
     const servicePost = {
       _id: this.editedServiceId,
       serviceName: this.editServiceForm.value.serviceName,
       serviceInfo: this.editServiceForm.value.serviceInfo,
     };
-    const editedPost: any = this._api.editServicePost(servicePost, this.editServiceForm.value.image)
-      .subscribe(event => {
-        // progress
-        if (event.type === HttpEventType.DownloadProgress) {
-          console.log(event.loaded, event.total); 
-          // event.loaded = bytes transfered 
-          // event.total = "Content-Length", set by the server
-          this.progressPercentage = 100 / event.total * event.loaded;
-          console.log(this.progressPercentage);
-          this.progressBar.style.width = this.progressPercentage + "%";
-        }
-        // finished
-        if (event.type === HttpEventType.Response) {
-          console.log(event.body);
-          swal.fire({
-            title: "Good job!",
-            text: "Service Post successfully updated",
-            icon: "success",
-          });
-          this.getServicePosts(); // rebuild view model
-        }
+    const editedPost: any = this._api
+      .editServicePost(servicePost, this.editServiceForm.value.image)
+      .subscribe(
+        (event) => {
+          // progress
+          if (event.type === HttpEventType.DownloadProgress) {
+            console.log(event.loaded, event.total);
+            // event.loaded = bytes transfered
+            // event.total = "Content-Length", set by the server
+            this.progressPercentage = (100 / event.total) * event.loaded;
+            console.log(this.progressPercentage);
+            this.progressBar.style.width = this.progressPercentage + "%";
+          }
+          // finished
+          if (event.type === HttpEventType.Response) {
+            console.log(event.body);
+            swal.fire({
+              title: "Good job!",
+              text: "Service Post successfully updated",
+              icon: "success",
+            });
+            this.getServicePosts(); // rebuild view model
+          }
+        },
+        (err) => console.log(err, "promise error")
+      );
 
-      }, err => console.log(err, 'promise error'))
-    
     $("#editModal").modal("hide");
   }
 

@@ -16,11 +16,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.setUpAnalytics();
-    this.meta.addTags([
-      { name: 'title', content: 'portfolio' },
-      { name: 'description', content: 'Main Page META description' },
-      { name: 'keywords', content: 'main page meta keywords' }  
-    ]);
+    // this.meta.addTags([
+    //   { name: 'title', content: 'portfolio' },
+    //   { name: 'description', content: 'Main Page META description' },
+    //   { name: 'keywords', content: 'main page meta keywords' }  
+    // ]);
   }
 
   setUpAnalytics() {

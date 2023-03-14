@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
 import appState from '../../appState';
 
-import { Meta } from "@angular/platform-browser";
+import { Meta, Title } from "@angular/platform-browser";
 
 declare var jQuery: any
 declare var $: any
@@ -19,14 +19,15 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   appState = appState;
   url = this.appState.hostName;
 
-  constructor(private api: ApiService, private http: HttpClient, private meta: Meta) { }
+  constructor(private api: ApiService, private http: HttpClient, private meta: Meta, private title: Title) { }
 
   async ngOnInit() {
     this.reloadImg();
     this.lazyInit();
+    this.title.setTitle("Permament makeup before and after photos of permament result");
     this.meta.addTags([
-      { name: 'description', content: 'portfolio Page META description' },
-      { name: 'keywords', content: 'portfolio page meta keywords' }  
+      { name: 'description', content: "portfolio of Nataliya's work, unedited before and after photos: see the amazing transformation permament makeup can bring" },
+      { name: 'keywords', content: 'permament makeup portfolio' }  
     ]);
   }
 

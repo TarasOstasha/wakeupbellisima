@@ -14,6 +14,7 @@ const chalk = require('chalk');
 const User = require('../models/users');
 const ReviewMessage = require('../models/review');
 const Service = require('../models/serviceModel');
+const Certificate = require('../models/certificateModel');
 //var cors = require('cors');
 //let portfolioImgsList;
 
@@ -171,7 +172,29 @@ router.delete('/my-service/:id', async (req, res) => {
 
 });
 
-
+// about us page
+router.get('/certificate', (req, res) => {
+  try {
+    let certificates = [
+      { url: '/certificate/certificate1.jpg' },
+      { url: '/certificate/certificate2.jpg' },
+      { url: '/certificate/certificate3.jpg' },
+      { url: '/certificate/certificate4.jpg' },
+      { url: '/certificate/certificate5.jpg' },
+      { url: '/certificate/certificate6.jpg' },
+      { url: '/certificate/certificate7.jpg' },
+      { url: '/certificate/certificate8.jpg' },
+      { url: '/certificate/Certificate9.jpg' },
+      // { url: '/certificate/Certificate (1).pdf' }
+    ];
+    res.status(200).json({
+      status: 'ok',
+      data: certificates
+    })
+  } catch (error) {
+    res.status(500).json({ message: 'error', error });
+  }
+})
 
 router.get('/portfolio-imgs', async (req, res) => {
   //const portfolioImgsList = await fs.readdir('downloads/imgs');

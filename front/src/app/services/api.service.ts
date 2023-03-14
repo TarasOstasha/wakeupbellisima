@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpErrorResponse  } from '@angular/common/http';
 import  appState  from '../appState';
+import { throwError, Observable } from 'rxjs';
+import { catchError, tap, shareReplay  } from 'rxjs/operators';
 
 //var url = 'http://localhost/';
 //var url = 'http://localhost:3000/'; // this just for the local use
@@ -119,5 +121,39 @@ export class ApiService {
     //   (erorr) => console.log(erorr)
     // )
   }
-  
+
+  // about us
+  // get
+  certificates$ = this.http.get(url + 'certificate')
+    .pipe(
+      tap(data => console.log('Certificates ', JSON.stringify(data))),
+      shareReplay(1),
+      catchError(this.handleError)
+    )
+  // post  
+  // certificatesPost$ = this.http.post(url + 'certificate')
+  // .pipe(
+  //   tap(data => console.log('Certificates ', JSON.stringify(data))),
+  //   catchError(err => {
+  //     console.log(err);
+  //     throw new Error('Could not retrive');
+  //   })
+  // )
+
+
+  private handleError(err: HttpErrorResponse): Observable<never> {
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Backend returned code ${err.status}: ${err.message}`;
+    }
+    console.error(err);
+    return throwError(() => errorMessage);
+  }
 }
