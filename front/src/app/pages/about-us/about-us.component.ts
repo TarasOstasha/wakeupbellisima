@@ -73,6 +73,22 @@ export class AboutUsComponent implements AfterViewInit {
         slidesToShow: 1,
         slidesToScroll: 1,
         //variableWidth: true
+        responsive: [
+          {
+            // tablet
+            breakpoint: 991,
+            settings: {
+              slidesToShow: 1
+            }
+          },
+          {
+            // mobile portrait
+            breakpoint: 479,
+            settings: {
+              slidesToShow: 1
+            }
+          }
+        ]
       });
     }, 450);
   }
