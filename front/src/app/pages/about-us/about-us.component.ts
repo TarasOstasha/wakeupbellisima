@@ -67,10 +67,10 @@ export class AboutUsComponent implements AfterViewInit {
         autoplay: true,
         cssEase: "ease",
         dots: true,
-        centerMode: true,
+        //centerMode: true,
         lazyLoad: "ondemand",
         zIndex: 1,
-        slidesToShow: 3,
+        slidesToShow: 1,
         slidesToScroll: 1,
         //variableWidth: true
       });
@@ -96,15 +96,27 @@ export class AboutUsComponent implements AfterViewInit {
 
   //certificates = this._api.certificates$; 
 
+  // certificates = [
+  //   { url: "../../../assets/imgs/certificate1.jpg" },
+  //   { url: "../../../assets/imgs/certificate2.jpg" },
+  //   { url: "../../../assets/imgs/certificate3.jpg" },
+  //   { url: "../../../assets/imgs/certificate4.jpg" },
+  //   { url: "../../../assets/imgs/certificate5.jpg" },
+  //   { url: "../../../assets/imgs/certificate6.jpg" },
+  //   { url: "../../../assets/imgs/certificate7.jpg" },
+  //   { url: "../../../assets/imgs/certificate8.jpg" }
+  // ];
+
   certificates = [
-    { url: "../../../assets/imgs/certificate1.jpg" },
-    { url: "../../../assets/imgs/certificate2.jpg" },
-    { url: "../../../assets/imgs/certificate3.jpg" },
-    { url: "../../../assets/imgs/certificate4.jpg" },
-    { url: "../../../assets/imgs/certificate5.jpg" },
-    { url: "../../../assets/imgs/certificate6.jpg" },
-    { url: "../../../assets/imgs/certificate7.jpg" },
-    { url: "../../../assets/imgs/certificate8.jpg" }
+    { url: "../../../assets/imgs/certificates/certificate1.jpg" },
+    { url: "../../../assets/imgs/certificates/certificate2.jpg" },
+    { url: "../../../assets/imgs/certificates/certificate3.jpg" },
+    { url: "../../../assets/imgs/certificates/certificate4.jpeg" },
+    { url: "../../../assets/imgs/certificates/certificate5.jpeg" },
+    { url: "../../../assets/imgs/certificates/certificate6.jpeg" },
+    { url: "../../../assets/imgs/certificates/certificate7.jpeg" },
+    { url: "../../../assets/imgs/certificates/certificate8.jpeg" },
+    { url: "../../../assets/imgs/certificates/certificate10.jpg" }
   ];
 
   // currentSlide = 0;
