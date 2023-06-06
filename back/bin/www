@@ -17,7 +17,7 @@ var fs = require('fs');
 //var port = normalizePort(process.env.PORT || '81');
 //var port = normalizePort(process.env.PORT || '3000'); // local using
 
-var port = normalizePort(process.env.PORT || '80'); // for production
+var port = normalizePort(process.env.PORT || '81'); // for production
 
 app.set('port', port);
 
